@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDigitalShelf.View.CategoryInfoPage"
+             Title="Category Info">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" x:Name="SaveButton"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Label Text="Value:"/>
+            <Entry Text="{Binding CategoryItem.Value}"/>
+            <Label Text="Description:"/>
+            <Entry Text="{Binding CategoryItem.Description}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
