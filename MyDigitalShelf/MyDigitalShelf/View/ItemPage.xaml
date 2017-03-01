@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyDigitalShelf"
              x:Class="MyDigitalShelf.MainPage"
-             Title="Category List">
+             Title="Item List">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Update" Command="{Binding LoadCategoryDirectoryCommand}"/>
+        <ToolbarItem Text="Update" Command="{Binding LoadItemDirectoryCommand}"/>
         <ToolbarItem Text="Clean" Command="{Binding CleanDataCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout    Padding="10"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-            <ListView x:Name="CategoryList" ItemsSource="{Binding CategoryList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <ListView x:Name="ItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <ListView.ItemTemplate  >
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding Image}" Text="{Binding Value}" Detail="{Binding Description}"  TextColor="Blue" DetailColor="Navy"/>
+                        <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Description}"  TextColor="Blue" DetailColor="Navy"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="+" x:Name="AddCategory" BorderRadius="20" FontSize="Large" BackgroundColor="Green" TextColor="White" AbsoluteLayout.LayoutBounds="1,1,60,60" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <Button Text="+" x:Name="AddItem" BorderRadius="20" FontSize="Large" BackgroundColor="Green" TextColor="White" AbsoluteLayout.LayoutBounds="1,1,60,60" AbsoluteLayout.LayoutFlags="PositionProportional" />
             <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
         </AbsoluteLayout>
     </ContentPage.Content>

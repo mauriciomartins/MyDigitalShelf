@@ -12,7 +12,7 @@ namespace MyDigitalShelf.model
 {
     class ContentDirectoryVM : ObservableBaseObject
     {
-        public ObservableCollection<Content> ContentList { get; set; }
+        public ObservableCollection<Item> ContentList { get; set; }
         private bool isBusy = false;
         public bool IsBusy
         {
@@ -27,7 +27,7 @@ namespace MyDigitalShelf.model
 
         public ContentDirectoryVM()
         {
-            this.ContentList = new ObservableCollection<Content>();
+            this.ContentList = new ObservableCollection<Item>();
             this.IsBusy = false;
             this.LoadContentDirectoryCommand = new Command(() => LoadDirectory(),()=>!this.IsBusy);
         }
@@ -38,10 +38,10 @@ namespace MyDigitalShelf.model
             {
                 IsBusy = true;
 
-               // await Task.Delay(3000);
-                var loadDirectory = ContentDirectoryService.LoadContentDirectory();
+               
+                var loadDirectory = await new ItemDirectoryService().GetItems();
 
-                foreach (var content in loadDirectory.ContentList)
+                foreach (var content in loadDirectory)
                 {
                     this.ContentList.Add(content);
                 }

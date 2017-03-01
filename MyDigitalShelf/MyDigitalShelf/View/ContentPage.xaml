@@ -18,7 +18,7 @@
                 <DataTemplate>
                     <AbsoluteLayout BackgroundColor="{Binding Position,Converter={StaticResource CardColorConverter}}">
                         <AbsoluteLayout  AbsoluteLayout.LayoutBounds="0,0,1,.8"  AbsoluteLayout.LayoutFlags="All"  Padding="10">
-                            <Label  TextColor="White" Text="{Binding Value}"       AbsoluteLayout.LayoutBounds="0,0,1,.5"  AbsoluteLayout.LayoutFlags="All"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
+                            <Label  TextColor="White" Text="{Binding Name}"       AbsoluteLayout.LayoutBounds="0,0,1,.5"  AbsoluteLayout.LayoutFlags="All"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
                             <Label  TextColor="White" Text="{Binding Description}" AbsoluteLayout.LayoutBounds=".5,1,1,.5" AbsoluteLayout.LayoutFlags="All"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
                         </AbsoluteLayout>
                         <AbsoluteLayout AbsoluteLayout.LayoutBounds=".8,1,1,.16" AbsoluteLayout.LayoutFlags="All" >

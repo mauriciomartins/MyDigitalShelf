@@ -40,24 +40,24 @@
     </Compile>
     <Compile Include="Model\Entity\Directory\ContentDirectory.cs" />
     <Compile Include="Model\Entity\Directory\CategoryDirectory.cs" />
+    <Compile Include="Model\Entity\Notes.cs" />
     <Compile Include="Model\Entity\Observable\ObservableBaseObject.cs" />
-    <Compile Include="Model\Service\AzureServiceCategory.cs" />
-    <Compile Include="Model\Service\AzureService.cs" />
-    <Compile Include="Model\Service\ContentDirectoryService.cs" />
+    <Compile Include="Model\Service\UserDirectoryService.cs" />
+    <Compile Include="Model\Service\ItemDirectoryService.cs" />
     <Compile Include="Model\Service\CategoryDirectoryService.cs" />
     <Compile Include="Storage\DatabaseManager.cs" />
     <Compile Include="Storage\Interface\ISQLite.cs" />
     <Compile Include="ViewModel\CategoryDetailDirectoryVM.cs" />
-    <Compile Include="ViewModel\CategoryDirectoryVM.cs" />
+    <Compile Include="ViewModel\ItemDirectoryVM.cs" />
     <Compile Include="ViewModel\ContentDirectoryVM.cs" />
     <Compile Include="View\CategoryInfoPage.xaml.cs">
       <DependentUpon>CategoryInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CategoryPage.xaml.cs">
-      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    <Compile Include="View\ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Entity\Category.cs" />
-    <Compile Include="Model\Entity\Content.cs" />
+    <Compile Include="Model\Entity\Item.cs" />
     <Compile Include="Model\Entity\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ContentPage.xaml.cs">
@@ -66,7 +66,7 @@
     <Compile Include="View\ValueConverter\CardColor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\CategoryPage.xaml">
+    <EmbeddedResource Include="View\ItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

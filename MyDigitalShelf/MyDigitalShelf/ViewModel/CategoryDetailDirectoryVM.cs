@@ -39,7 +39,7 @@ namespace MyDigitalShelf.model
             this.IsBusy = false;
             this.SaveCategoryDirectoryCommand = new Command(()=> SaveDirectory(),()=>!this.IsBusy);
             this.categoryItem = new Category();
-            this.categoryItem.Value       = "TEste1";
+            this.categoryItem.Name       = "TEste1";
             this.categoryItem.Description = "TEste2";
         }
 
@@ -51,7 +51,7 @@ namespace MyDigitalShelf.model
 
                 Task.Delay(3000);
 
-                CategoryDirectoryService.saveCategory(categoryItem);
+                new CategoryDirectoryService().saveCategory(categoryItem);
                
                 IsBusy = false;
             }

@@ -1,38 +1,40 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
-using MyDigitalShelf.MyDigitalShelf;
+using MyDigitalShelf.model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MyDigitalShelf.Model.Service
 {
-    class CategoryDirectoryService
+    class ItemDirectoryService
     {
+
         IMobileServiceClient Client;
-        IMobileServiceSyncTable<Category> Table;
+        IMobileServiceSyncTable<Item> Table;
         const string dbPath = "MyDigitalShelfDB";
         const string MyAppServiceURL = "http://mydigitalshelf.azurewebsites.net";
 
-        public CategoryDirectoryService()
+        public ItemDirectoryService()
         {
             Client = new MobileServiceClient(MyAppServiceURL);
             var store = new MobileServiceSQLiteStore(dbPath);
-            store.DefineTable<Category>();
+            store.DefineTable<Item>();
             Client.SyncContext.InitializeAsync(store);
-            Table = Client.GetSyncTable<Category>();
+            Table = Client.GetSyncTable<Item>();
         }
 
-        public async Task<List<Category>> GetCategories()
+        public async Task<List<Item>> GetItems()
         {
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
                 await this.SyncAsync();
             }
-            var Items = await this.GetTable("9d573dfa-bb3f-4eae-ab63-95c126401fd2");
+            var Items = await this.GetTable("df258d04-d3da-4380-a528-113d34d9e26c");    
             return Items.ToList();
         }
 
@@ -42,7 +44,7 @@ namespace MyDigitalShelf.Model.Service
             try
             {
                 await Client.SyncContext.PushAsync();
-                await Table.PullAsync("GetAllCategories", Table.CreateQuery());
+                await Table.PullAsync("GetAllItems", Table.CreateQuery());
             }
             catch (MobileServicePushFailedException pushError)
             {
@@ -53,30 +55,31 @@ namespace MyDigitalShelf.Model.Service
             }
         }
 
-        public Task<IEnumerable<Category>> GetTable(string id)
+        public Task<IEnumerable<Item>> GetTable(string user_id)
         {
-            return Table.Where(c => c.Id == id).ToEnumerableAsync();
+            return Table.Where(c=>c.UserId==user_id).ToEnumerableAsync();
         }
 
         public async Task CleanData()
         {
-            await Table.PurgeAsync("GetAllCategories", Table.CreateQuery(), new System.Threading.CancellationToken());
+            await Table.PurgeAsync("GetAllItems", Table.CreateQuery(), new System.Threading.CancellationToken());
         }
 
-        public async void saveCategory(Category category)
+        public async void saveItem(Item Item)
         {
             Random rdn = new Random(DateTime.Now.Millisecond);
             string key = rdn.Next(12384748, 32384748).ToString();
-            category.Key = key;
-            await this.AddCategory(category);
+            Item.Key = key;
+            await this.AddItem(Item);
         }
 
 
-        public async Task AddCategory(Category category)
+        public async Task AddItem(Item Item)
         {
-            await Table.InsertAsync(category);
+            await Table.InsertAsync(Item);
 
             await SyncAsync();
         }
+
     }
 }

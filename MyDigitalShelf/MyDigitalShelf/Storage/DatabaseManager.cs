@@ -22,7 +22,7 @@ namespace MyDigitalShelf.Model.Storage
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
             database.CreateTable<Category>();
-            database.CreateTable<Content>();
+            database.CreateTable<Item>();
             database.CreateTable<User>();
         }
 

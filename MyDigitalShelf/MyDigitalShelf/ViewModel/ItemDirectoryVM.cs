@@ -11,9 +11,10 @@ using Xamarin.Forms;
 
 namespace MyDigitalShelf.model
 {
-    class CategoryDirectoryVM : ObservableBaseObject
+    class ItemDirectoryVM : ObservableBaseObject
     {
-        public ObservableCollection<Category> CategoryList  { get; set; }
+        private ItemDirectoryService ItemDirectoryService;
+        public ObservableCollection<Item> ItemList  { get; set; }
         private bool isBusy = false;
         public bool IsBusy
         {
@@ -26,16 +27,17 @@ namespace MyDigitalShelf.model
             get; set;
         }
 
-        public Command LoadCategoryDirectoryCommand
+        public Command LoadItemDirectoryCommand
         {
             get;set;
         }
 
-        public CategoryDirectoryVM()
+        public ItemDirectoryVM()
         {
-            this.CategoryList = new ObservableCollection<Category>();
+            this.ItemDirectoryService = new ItemDirectoryService();
+            this.ItemList = new ObservableCollection<Item>();
             this.IsBusy = false;
-            this.LoadCategoryDirectoryCommand = new Command(()=> LoadDirectory(),()=>!this.IsBusy);
+            this.LoadItemDirectoryCommand = new Command(()=> LoadDirectory(),()=>!this.IsBusy);
             this.CleanDataCommand             = new Command(() => CleanData(), () => !this.IsBusy);
         }
 
@@ -46,7 +48,7 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    await CategoryDirectoryService.CleanData();
+                    await this.ItemDirectoryService.CleanData();
                 }
                 catch (Exception e)
                 {
@@ -65,24 +67,14 @@ namespace MyDigitalShelf.model
             if (!IsBusy)
             {
                 
-
-                /*
-                await Task.Delay(3000);
-                var loadDirectory = CategoryDirectoryService.LoadCategoryDirectory();
-                
-                foreach (var category in loadDirectory.CategoryList)
-                {
-                    this.CategoryList.Add(category);
-                }
-                */
                 try
                 {
                     IsBusy = true;
-                    this.CategoryList.Clear();
-                    var categories =  await CategoryDirectoryService.GetCategories();
-                    foreach (var category in categories)
+                    this.ItemList.Clear();
+                    var items =  await this.ItemDirectoryService.GetItems();
+                    foreach (var Item in items)
                     {
-                        this.CategoryList.Add(category);
+                        this.ItemList.Add(Item);
                     }
                 }
                 catch (Exception e)
