@@ -11,21 +11,26 @@
             <local:CardColor x:Key="CardColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" />
+        <ToolbarItem Text="Add" x:Name="AddItem"/>
+    </ContentPage.ToolbarItems>
+        <ContentPage.Content>
+            <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
+            <forms:CarouselView x:Name="NotesList" ItemsSource="{Binding NotesList}">
+                <forms:CarouselView.ItemTemplate >
+                    <DataTemplate>
+                        <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
+                            <StackLayout Padding="10" >
+                                <Image Source="{Binding Image}"  />
+                                <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
+                             </StackLayout>
+                        </ScrollView>
+                    </DataTemplate>
+                </forms:CarouselView.ItemTemplate>
+            </forms:CarouselView>
 
-    <StackLayout>
-        <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
-        <forms:CarouselView x:Name="NotesList" ItemsSource="{Binding NotesList}">
-            <forms:CarouselView.ItemTemplate >
-                <DataTemplate>
-                    <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
-                        <StackLayout Padding="10" >
-                            <Image Source="{Binding Image}"  />
-                            <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
-                         </StackLayout>
-                    </ScrollView>
-                </DataTemplate>
-            </forms:CarouselView.ItemTemplate>
-        </forms:CarouselView>
-
-    </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

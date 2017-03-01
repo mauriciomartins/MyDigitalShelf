@@ -8,6 +8,7 @@ namespace MyDigitalShelf.model
     [DataTable("item")]
     public class Item : ObservableBaseObject, IKeyObject
     {
+        private string id;
         private string name;
         private string description;
         private string date;
@@ -30,7 +31,8 @@ namespace MyDigitalShelf.model
         [JsonProperty("id")]
         public string Id
         {
-            get; set;
+            get { return this.id; }
+            set { this.id = value; OnPropertyChanged(); }
         }
 
         [JsonProperty("user_id")]

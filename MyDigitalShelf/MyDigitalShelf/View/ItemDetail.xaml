@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDigitalShelf.View.ItemDetail"
+             Title="Item Detail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" x:Name="SaveButton" Command="{Binding SaveCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                <Label Text="Name:"/>
+                <Entry Text="{Binding Item.Name}"/>
+                <Label Text="Description:"/>
+                <Entry Text="{Binding Item.Description}"/>
+                <Label Text="Creator:"/>
+                <Entry Text="{Binding Item.Writer}"/>
+                <Label Text="Publishing Company:"/>
+                <Entry Text="{Binding Item.PublishingCompany}"/>
+                <Label Text="Link:"/>
+                <Entry Text="{Binding Item.Link }" Keyboard="Url"/>
+                <Label Text="Image:"/>
+                <Entry Text="{Binding Item.Image}" Keyboard="Url"/>
+                <Label Text="Date:"/>
+                <Entry Text="{Binding Item.Date}"/>
+                <Label Text="Publishing Date:"/>
+                <Entry Text="{Binding Item.PublishingDate}"/>
+                <Label Text="Source:"/>
+                <Entry Text="{Binding Item.Source}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

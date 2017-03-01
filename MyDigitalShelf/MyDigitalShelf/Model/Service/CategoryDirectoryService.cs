@@ -75,7 +75,6 @@ namespace MyDigitalShelf.Model.Service
         public async Task AddCategory(Category category)
         {
             await Table.InsertAsync(category);
-
             await SyncAsync();
         }
     }

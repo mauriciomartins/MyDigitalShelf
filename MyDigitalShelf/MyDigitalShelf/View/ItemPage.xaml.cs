@@ -17,14 +17,28 @@ namespace MyDigitalShelf
             InitializeComponent();
             ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
             this.BindingContext = ItemDirectoryVM;
-            //this.MyItemList.ItemSelected += ItemList_ItemSelected;
-            this.AddItem.Clicked       += AddItem_Clicked;
+            this.AddItem.Clicked += AddItem_Clicked;
+            this.UpdateItem.Clicked += UpdateItem_Clicked;
             ItemDirectoryVM.LoadDirectory();
         }
 
         private void AddItem_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new View.CategoryInfoPage());
+            Item newItem = new Item();
+            Navigation.PushAsync(new View.ItemDetail(newItem));
+        }
+
+
+        private void UpdateItem_Clicked(object sender, EventArgs e)
+        {
+            Item selectedItem = (Item)this.MyItemList.Item;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            Navigation.PushAsync(new View.ItemDetail(selectedItem));
         }
 
         private void ItemList_ItemSelected(object sender, EventArgs e)

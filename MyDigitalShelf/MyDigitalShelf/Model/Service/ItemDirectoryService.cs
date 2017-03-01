@@ -76,7 +76,15 @@ namespace MyDigitalShelf.Model.Service
 
         public async Task AddItem(Item Item)
         {
-            await Table.InsertAsync(Item);
+            if(Item.Id==null|| Item.Id == "")
+            {
+                await Table.InsertAsync(Item);
+            }
+            else
+            {
+                await Table.UpdateAsync(Item);
+            }
+            
 
             await SyncAsync();
         }

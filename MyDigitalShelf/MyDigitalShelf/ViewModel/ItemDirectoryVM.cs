@@ -14,13 +14,27 @@ namespace MyDigitalShelf.model
 {
     class ItemDirectoryVM : ObservableBaseObject
     {
+        private Item item;
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
         private bool isBusy = false;
+
+
+        public Item Item
+        {
+            get { return this.item; }
+            set { this.item = value; OnPropertyChanged(); }
+        }
+
         public bool IsBusy
         {
             get { return this.isBusy; }
             set { this.isBusy = value; OnPropertyChanged(); }
+        }
+
+        public Command SaveCommand
+        {
+            get; set;
         }
 
         public Command CleanDataCommand
@@ -39,7 +53,32 @@ namespace MyDigitalShelf.model
             this.ItemList = new ObservableCollection<Item>();
             this.IsBusy = false;
             this.LoadItemDirectoryCommand = new Command(()=> LoadDirectory(),()=>!this.IsBusy);
-            this.CleanDataCommand             = new Command(() => CleanData(), () => !this.IsBusy);
+            this.CleanDataCommand         = new Command(() => CleanData(), () => !this.IsBusy);
+            this.SaveCommand              = new Command(() => SaveData(), () => !this.IsBusy);
+        }
+
+        private async void SaveData()
+        {
+            if (!IsBusy)
+            {
+                try
+                {
+                    IsBusy = true;
+                    this.item.UserId = "df258d04-d3da-4380-a528-113d34d9e26c";
+                    this.ItemDirectoryService.saveItem(this.item);
+                    this.item = new Item();
+                    IsBusy = false;
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Cadastro realizado com sucesso!", "OK");
+                }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
         }
 
         private async void CleanData()
