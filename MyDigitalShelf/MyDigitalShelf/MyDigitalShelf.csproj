@@ -38,9 +38,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Entity\ContentDirectory.cs" />
-    <Compile Include="Model\Entity\CategoryDirectory.cs" />
-    <Compile Include="Model\Entity\ObservableBaseObject.cs" />
+    <Compile Include="Model\Entity\Directory\ContentDirectory.cs" />
+    <Compile Include="Model\Entity\Directory\CategoryDirectory.cs" />
+    <Compile Include="Model\Entity\Observable\ObservableBaseObject.cs" />
+    <Compile Include="Model\Service\AzureServiceCategory.cs" />
     <Compile Include="Model\Service\AzureService.cs" />
     <Compile Include="Model\Service\ContentDirectoryService.cs" />
     <Compile Include="Model\Service\CategoryDirectoryService.cs" />

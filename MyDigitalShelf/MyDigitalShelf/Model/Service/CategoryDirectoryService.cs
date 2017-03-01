@@ -14,12 +14,12 @@ namespace MyDigitalShelf.Model.Service
 
         public async static Task<List<Category>> GetCategories()
         {
-                var Service = new AzureService<Category>();
+            var Service = new AzureServiceCategory();
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
                 await Service.SyncAsync();
             }
-            var Items = await Service.GetTable();
+            var Items = await Service.GetTable("9d573dfa-bb3f-4eae-ab63-95c126401fd2");
             return Items.ToList();
         }
 
