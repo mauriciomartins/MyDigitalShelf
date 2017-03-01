@@ -2,6 +2,7 @@
 using MyDigitalShelf.Model.Service;
 using MyDigitalShelf.MyDigitalShelf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -70,11 +71,18 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    this.ItemList.Clear();
-                    var items =  await this.ItemDirectoryService.GetItems();
-                    foreach (var Item in items)
+                    if(this.ItemList!=null&& this.ItemList.Any()&& this.ItemList.Count>0)
                     {
-                        this.ItemList.Add(Item);
+                        this.RemoveAll();
+                        await this.ItemDirectoryService.CleanData();
+                    }
+                    
+                    var items =  await this.ItemDirectoryService.GetItems();
+                    if (items.Any()) { 
+                        foreach (var Item in items)
+                        {
+                            this.ItemList.Add(Item);
+                        }
                     }
                 }
                 catch (Exception e)
@@ -85,6 +93,14 @@ namespace MyDigitalShelf.model
                 {
                     IsBusy = false;
                 }
+            }
+        }
+
+        public  void RemoveAll()
+        {
+            while (this.ItemList.Count > 0)
+            {
+                ItemList.RemoveAt(this.ItemList.Count - 1);
             }
         }
     }
