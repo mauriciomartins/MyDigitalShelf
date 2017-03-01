@@ -4,7 +4,7 @@
              x:Class="MyDigitalShelf.View.ItemDetail"
              Title="Item Detail">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" x:Name="SaveButton" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Save" x:Name="SaveButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace MyDigitalShelf.model
             this.SaveCommand              = new Command(() => SaveData(), () => !this.IsBusy);
         }
 
-        private async void SaveData()
+        public async void SaveData()
         {
             if (!IsBusy)
             {
@@ -68,7 +69,7 @@ namespace MyDigitalShelf.model
                     this.ItemDirectoryService.saveItem(this.item);
                     this.item = new Item();
                     IsBusy = false;
-                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Cadastro realizado com sucesso!", "OK");
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
                 catch (Exception e)
                 {
@@ -115,6 +116,7 @@ namespace MyDigitalShelf.model
                         this.RemoveAll();
                         await this.ItemDirectoryService.CleanData();
                     }
+
                     
                     var items =  await this.ItemDirectoryService.GetItems();
                     if (items.Any()) { 
