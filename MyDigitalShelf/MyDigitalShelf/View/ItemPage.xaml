@@ -3,21 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyDigitalShelf"
              x:Class="MyDigitalShelf.MainPage"
-             Title="Item List">
+              xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             Title="My Shelf">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Update" Command="{Binding LoadItemDirectoryCommand}"/>
         <ToolbarItem Text="Clean" Command="{Binding CleanDataCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout    Padding="10"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-            <ListView x:Name="ItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <ListView.ItemTemplate  >
+            <forms:CarouselView x:Name="MyItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <forms:CarouselView.ItemTemplate >
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Description}"  TextColor="Blue" DetailColor="Navy"/>
+                        <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
+                            <StackLayout Padding="10" >
+                                <Label  TextColor="Gray" Text="{Binding Source}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
+                                <Image Source="{Binding Image}"   />
+                                <Label  TextColor="Gray" Text="{Binding Date}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+                                <Label  TextColor="Blue" Text="{Binding Name}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
+                                <Button  x:Name="MyNotesButton" Image="https://goo.gl/u2Hnsp" Text="My Notes" Clicked="ItemList_ItemSelected" />
+                                <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
+                                <Label  TextColor="Gray" Text="{Binding Writer}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+                                <Label  TextColor="Gray" Text="{Binding Publishingcompany}" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
+                            </StackLayout>
+                        </ScrollView>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Text="+" x:Name="AddItem" BorderRadius="20" FontSize="Large" BackgroundColor="Green" TextColor="White" AbsoluteLayout.LayoutBounds="1,1,60,60" AbsoluteLayout.LayoutFlags="PositionProportional" />
+                </forms:CarouselView.ItemTemplate>
+            </forms:CarouselView>
+            <AbsoluteLayout AbsoluteLayout.LayoutBounds=".8,1,1,.16" AbsoluteLayout.LayoutFlags="All" >
+                <Button Text="+" x:Name="AddItem" BorderRadius="20" FontSize="Large" BackgroundColor="Green" TextColor="White" AbsoluteLayout.LayoutBounds="1,1,60,60" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            </AbsoluteLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
         </AbsoluteLayout>
     </ContentPage.Content>

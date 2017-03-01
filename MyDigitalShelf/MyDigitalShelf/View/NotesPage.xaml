@@ -1,16 +1,17 @@
-﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-				 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-				 x:Class="MyDigitalShelf.View.Content"
-                 xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-                 xmlns:local="clr-namespace:MyDigitalShelf.View.ValueConverter"
-                 Title="Content Slide">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDigitalShelf.View.NotesPage"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:local="clr-namespace:MyDigitalShelf.View.ValueConverter"
+             Title="Content Slide">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:CardColor x:Key="CardColorConverter" />  
+            <local:CardColor x:Key="CardColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <StackLayout>
         <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
         <forms:CarouselView x:Name="ContentList" ItemsSource="{Binding ContentList}">
@@ -31,7 +32,6 @@
                 </DataTemplate>
             </forms:CarouselView.ItemTemplate>
         </forms:CarouselView>
-        
+
     </StackLayout>
-    
 </ContentPage>

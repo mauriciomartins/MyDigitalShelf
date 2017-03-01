@@ -1,5 +1,4 @@
 ﻿using MyDigitalShelf.model;
-using MyDigitalShelf.MyDigitalShelf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace MyDigitalShelf.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Content : ContentPage
+    public partial class NotesPage : ContentPage
     {
-        public Content(Category selectedCategory)
+         public NotesPage(Item item)
         {
             InitializeComponent();
             ContentDirectoryVM contentDirectoryVM = new ContentDirectoryVM();

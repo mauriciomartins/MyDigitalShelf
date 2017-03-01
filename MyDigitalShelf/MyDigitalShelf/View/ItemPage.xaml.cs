@@ -17,8 +17,8 @@ namespace MyDigitalShelf
             InitializeComponent();
             ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
             this.BindingContext = ItemDirectoryVM;
-            this.ItemList.ItemSelected += ItemList_ItemSelected;
-            this.AddItem.Clicked += AddItem_Clicked;
+            //this.MyItemList.ItemSelected += ItemList_ItemSelected;
+            this.AddItem.Clicked       += AddItem_Clicked;
             ItemDirectoryVM.LoadDirectory();
         }
 
@@ -27,16 +27,16 @@ namespace MyDigitalShelf
             Navigation.PushAsync(new View.CategoryInfoPage());
         }
 
-        private void ItemList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void ItemList_ItemSelected(object sender, EventArgs e)
         {
-            Item selectedItem = (Item)e.SelectedItem;
+           Item selectedItem = (Item)this.MyItemList.Item;
+                    
             if(selectedItem == null)
             {
                 return;
             }
-
-            Navigation.PushAsync(new View.Content(null));
-            this.ItemList.SelectedItem = null;
+            
+            Navigation.PushAsync(new View.NotesPage(selectedItem));
         }
     }
 }
