@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace MyDigitalShelf.model
 {
-    class ContentDirectoryVM : ObservableBaseObject
+    class NotesDirectoryVM : ObservableBaseObject
     {
-        public ObservableCollection<Item> ContentList { get; set; }
+        public ObservableCollection<Notes> NotesList { get; set; }
         private bool isBusy = false;
         public bool IsBusy
         {
@@ -25,25 +25,25 @@ namespace MyDigitalShelf.model
             get; set;
         }
 
-        public ContentDirectoryVM()
+        public NotesDirectoryVM()
         {
-            this.ContentList = new ObservableCollection<Item>();
+            this.NotesList = new ObservableCollection<Notes>();
             this.IsBusy = false;
-            this.LoadContentDirectoryCommand = new Command(() => LoadDirectory(),()=>!this.IsBusy);
+          //  this.LoadContentDirectoryCommand = new Command(() => LoadDirectory(),()=>!this.IsBusy);
         }
 
-        public async void LoadDirectory()
+        public async void LoadDirectory(string itemId)
         {
             if (!IsBusy)
             {
                 IsBusy = true;
 
                
-                var loadDirectory = await new ItemDirectoryService().GetItems();
+                var loadDirectory = await new NotesDirectoryService().GetNotes(itemId);
 
-                foreach (var content in loadDirectory)
+                foreach (var note in loadDirectory)
                 {
-                    this.ContentList.Add(content);
+                    this.NotesList.Add(note);
                 }
 
                 IsBusy = false;

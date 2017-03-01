@@ -11,11 +11,18 @@ namespace MyDigitalShelf.model
         private string description;
         private string link;
         private string image;
-        
+        private string itemId;
         [JsonProperty("id")]
         public string Id
         {
             get; set;
+        }
+
+        [JsonProperty("item_id")]
+        public string ItemId
+        {
+            get { return this.itemId; }
+            set { this.itemId = value; OnPropertyChanged(); }
         }
 
         [JsonProperty("description")]

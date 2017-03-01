@@ -4,7 +4,7 @@
              x:Class="MyDigitalShelf.View.NotesPage"
              xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              xmlns:local="clr-namespace:MyDigitalShelf.View.ValueConverter"
-             Title="Content Slide">
+             Title="Notes">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,21 +14,15 @@
 
     <StackLayout>
         <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
-        <forms:CarouselView x:Name="ContentList" ItemsSource="{Binding ContentList}">
+        <forms:CarouselView x:Name="NotesList" ItemsSource="{Binding NotesList}">
             <forms:CarouselView.ItemTemplate >
                 <DataTemplate>
-                    <AbsoluteLayout BackgroundColor="{Binding Position,Converter={StaticResource CardColorConverter}}">
-                        <AbsoluteLayout  AbsoluteLayout.LayoutBounds="0,0,1,.8"  AbsoluteLayout.LayoutFlags="All"  Padding="10">
-                            <Label  TextColor="White" Text="{Binding Name}"       AbsoluteLayout.LayoutBounds="0,0,1,.5"  AbsoluteLayout.LayoutFlags="All"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
-                            <Label  TextColor="White" Text="{Binding Description}" AbsoluteLayout.LayoutBounds=".5,1,1,.5" AbsoluteLayout.LayoutFlags="All"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
-                        </AbsoluteLayout>
-                        <AbsoluteLayout AbsoluteLayout.LayoutBounds=".8,1,1,.16" AbsoluteLayout.LayoutFlags="All" >
-                            <Button Text="Not yet" BackgroundColor="Red" TextColor="White"  AbsoluteLayout.LayoutBounds="0,0, .5, 1"
-                            AbsoluteLayout.LayoutFlags="All" />
-                            <Button Text="I got it" BackgroundColor="Green" TextColor="White"  AbsoluteLayout.LayoutBounds="1,1, 0.5, 1"
-                                AbsoluteLayout.LayoutFlags="All" />
-                        </AbsoluteLayout>
-                    </AbsoluteLayout>
+                    <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
+                        <StackLayout Padding="10" >
+                            <Image Source="{Binding Image}"  />
+                            <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
+                         </StackLayout>
+                    </ScrollView>
                 </DataTemplate>
             </forms:CarouselView.ItemTemplate>
         </forms:CarouselView>

@@ -16,9 +16,9 @@ namespace MyDigitalShelf.View
          public NotesPage(Item item)
         {
             InitializeComponent();
-            ContentDirectoryVM contentDirectoryVM = new ContentDirectoryVM();
-            this.BindingContext = contentDirectoryVM;
-            contentDirectoryVM.LoadDirectory();
+            NotesDirectoryVM notesDirectoryVM = new NotesDirectoryVM();
+            this.BindingContext = notesDirectoryVM;
+            notesDirectoryVM.LoadDirectory(item.Id);
         }
     }
 }

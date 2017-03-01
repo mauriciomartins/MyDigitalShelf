@@ -42,6 +42,7 @@
     <Compile Include="Model\Entity\Directory\CategoryDirectory.cs" />
     <Compile Include="Model\Entity\Notes.cs" />
     <Compile Include="Model\Entity\Observable\ObservableBaseObject.cs" />
+    <Compile Include="Model\Service\NotesDirectoryService.cs" />
     <Compile Include="Model\Service\UserDirectoryService.cs" />
     <Compile Include="Model\Service\ItemDirectoryService.cs" />
     <Compile Include="Model\Service\CategoryDirectoryService.cs" />
@@ -49,7 +50,7 @@
     <Compile Include="Storage\Interface\ISQLite.cs" />
     <Compile Include="ViewModel\CategoryDetailDirectoryVM.cs" />
     <Compile Include="ViewModel\ItemDirectoryVM.cs" />
-    <Compile Include="ViewModel\ContentDirectoryVM.cs" />
+    <Compile Include="ViewModel\NotesDirectoryVM.cs" />
     <Compile Include="View\CategoryInfoPage.xaml.cs">
       <DependentUpon>CategoryInfoPage.xaml</DependentUpon>
     </Compile>
