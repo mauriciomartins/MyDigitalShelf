@@ -5,7 +5,8 @@
              Title="Item Detail">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search" x:Name="SearchItemButton" />
-        <ToolbarItem Text="Save" x:Name="SaveButton" />
+        <ToolbarItem Text="Delete" x:Name="DeleteButton"  />
+        <ToolbarItem Text="Save"   x:Name="SaveButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

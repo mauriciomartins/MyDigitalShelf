@@ -9,25 +9,16 @@ using System.Threading.Tasks;
 
 namespace MyDigitalShelf.Model.Entity
 {
-    [DataTable("imageLinks")]
-    public class BookImageDTO : ObservableBaseObject, IKeyObject
+   
+    public class BookImageDTO 
     {
         private string thumbnail;
-        [JsonProperty("smallThumbnail")]
+
+        [JsonProperty("thumbnail")]
         public string Thumbnail
         {
             get { return this.thumbnail; }
-            set { this.thumbnail = value; OnPropertyChanged(); }
+            set { this.thumbnail = value; }
         }
-
-        public string Key
-        {
-            get;
-            set;
-        }
-
-        [Version]
-        public string AzureVersion { get; set; }
-
     }
 }

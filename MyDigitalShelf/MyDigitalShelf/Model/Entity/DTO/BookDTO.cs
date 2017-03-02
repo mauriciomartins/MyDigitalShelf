@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace MyDigitalShelf.Model.Entity
 {
-    [DataTable("item")]
-    public class BookDTO : ObservableBaseObject, IKeyObject
+  
+    public class BookDTO 
     {
         private string kind;
         private string id;
@@ -20,31 +20,22 @@ namespace MyDigitalShelf.Model.Entity
         public string Kind
         {
             get { return this.kind; }
-            set { this.kind = value; OnPropertyChanged(); }
+            set { this.kind = value; }
         }
 
         [JsonProperty("id")]
         public string Id
         {
             get { return this.id; }
-            set { this.id = value; OnPropertyChanged(); }
+            set { this.id = value;}
         }
 
         [JsonProperty("volumeInfo")]
         public VolumeInfoDTO VolumeInfo
         {
             get { return this.volumeInfo; }
-            set { this.volumeInfo = value; OnPropertyChanged(); }
+            set { this.volumeInfo = value;}
         }
-
-        public string Key
-        {
-            get;
-            set;
-        }
-
-        [Version]
-        public string AzureVersion { get; set; }
-
+        
     }
 }

@@ -22,6 +22,23 @@ namespace MyDigitalShelf.View
             this.BindingContext = itemDirectoryVM;
             this.SaveButton.Clicked         += SaveButton_Clicked;
             this.SearchItemButton.Clicked   += SearchItemButton_Clicked;
+            this.DeleteButton.Clicked       += DeleteButton_Clicked;
+        }
+
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            if (itemDirectoryVM.Item.Id == null || itemDirectoryVM.Item.Id.Length == 0)
+            {
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Erro!", "Item não cadastrado!", "OK");
+            }
+            else
+            {
+                itemDirectoryVM.DeleteData();
+                await Task.Delay(3000);
+                Page page = await Navigation.PopAsync();
+                NavigationPage navPage = (NavigationPage)App.Current.MainPage;
+                ((MainPage)navPage.CurrentPage).Refresh();
+            }
         }
 
         private void SearchItemButton_Clicked(object sender, EventArgs e)

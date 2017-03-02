@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace MyDigitalShelf.Model.Entity
 {
-    [DataTable("volumeInfo")]
-    public class VolumeInfoDTO : ObservableBaseObject, IKeyObject
+    
+    public class VolumeInfoDTO 
     {
         private string id;
         private string name;
@@ -30,94 +30,85 @@ namespace MyDigitalShelf.Model.Entity
         public int Position
         {
             get { return this.position; }
-            set { this.position = value; OnPropertyChanged(); }
+            set { this.position = value;  }
         }
 
         [JsonProperty("id")]
         public string Id
         {
             get { return this.id; }
-            set { this.id = value; OnPropertyChanged(); }
+            set { this.id = value;  }
         }
 
         [JsonProperty("user_id")]
         public string UserId
         {
             get { return this.userId; }
-            set { this.userId = value; OnPropertyChanged(); }
+            set { this.userId = value;  }
         }
 
         [JsonProperty("title")]
         public string Name
         {
             get { return this.name; }
-            set { this.name = value; OnPropertyChanged(); }
+            set { this.name = value;  }
         }
 
         [JsonProperty("publishedDate")]
         public string PublishingDate
         {
             get { return this.publishingDate; }
-            set { this.publishingDate = value; OnPropertyChanged(); }
+            set { this.publishingDate = value;  }
         }
 
         [JsonProperty("description")]
         public string Description
         {
             get { return this.description; }
-            set { this.description = value; OnPropertyChanged(); }
+            set { this.description = value;  }
         }
 
         [JsonProperty("date")]
         public string Date
         {
             get { return this.date; }
-            set { this.date = value; OnPropertyChanged(); }
+            set { this.date = value;  }
         }
 
         [JsonProperty("evaluation")]
         public int Evaluation
         {
             get { return this.evaluation; }
-            set { this.evaluation = value; OnPropertyChanged(); }
+            set { this.evaluation = value;  }
         }
 
         [JsonProperty("authors")]
         public List<string> Writers
         {
             get { return this.writers; }
-            set { this.writers = value; OnPropertyChanged(); }
+            set { this.writers = value;  }
         }
 
         [JsonProperty("publisher")]
         public string Publishingcompany
         {
             get { return this.publishingcompany; }
-            set { this.publishingcompany = value; OnPropertyChanged(); }
+            set { this.publishingcompany = value;  }
         }
 
         [JsonProperty("imageLinks")]
         public BookImageDTO Image
         {
             get { return this.image; }
-            set { this.image = value; OnPropertyChanged(); }
+            set { this.image = value;  }
         }
 
         [JsonProperty("previewLink")]
         public string Link
         {
             get { return this.link; }
-            set { this.link = value; OnPropertyChanged(); }
+            set { this.link = value;  }
         }
-
-        public string Key
-        {
-            get;
-            set;
-        }
-
-        [Version]
-        public string AzureVersion { get; set; }
-
+   
     }
 }

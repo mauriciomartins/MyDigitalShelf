@@ -9,38 +9,31 @@ using System.Threading.Tasks;
 
 namespace MyDigitalShelf.Model.Entity
 {
-    [DataTable("item")]
-    public class SearchingInfoDTO : ObservableBaseObject, IKeyObject
+    public class SearchingInfoDTO
     {
         private string kind;
         private string totalItems;
-        private List<BookDTO> books; 
+        private BookDTO[] books; 
 
         [JsonProperty("Kind")]
         public string Kind
         {
             get { return this.kind; }
-            set { this.kind = value; OnPropertyChanged(); }
+            set { this.kind = value; }
         }
 
         [JsonProperty("totalItems")]
         public string TotalItems
         {
             get { return this.totalItems; }
-            set { this.totalItems = value; OnPropertyChanged(); }
+            set { this.totalItems = value; }
         }
 
         [JsonProperty("items")]
-        public List<BookDTO> Books
+        public BookDTO[] Books
         {
             get { return this.books; }
-            set { this.books = value; OnPropertyChanged(); }
-        }
-
-        public string Key
-        {
-            get;
-            set;
-        }      
+            set { this.books = value; }
+        }  
     }
 }

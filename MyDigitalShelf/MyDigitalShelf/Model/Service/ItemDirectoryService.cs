@@ -104,5 +104,14 @@ namespace MyDigitalShelf.Model.Service
             }
             return searchInfo;
         }
+
+        public async Task DeleteData(Item Item)
+        {
+            await Table.DeleteAsync(Item);
+            if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
+            {
+                await this.SyncAsync();
+            }
+        }
     }
 }
