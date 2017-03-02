@@ -7,7 +7,7 @@
              Title="My Shelf">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh" Command="{Binding LoadItemDirectoryCommand}"/>
-        <ToolbarItem Text="Update" x:Name="UpdateItem"/>
+        <ToolbarItem Text="Edit" x:Name="UpdateItem"/>
         <ToolbarItem Text="Add" x:Name   ="AddItem"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

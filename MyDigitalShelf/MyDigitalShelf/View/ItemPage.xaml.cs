@@ -31,6 +31,7 @@ namespace MyDigitalShelf
         private void AddItem_Clicked(object sender, EventArgs e)
         {
             Item newItem = new Item();
+            newItem.Date = DateTime.Today.Year.ToString();
             Navigation.PushAsync(new View.ItemDetail(newItem), true);
         }
 

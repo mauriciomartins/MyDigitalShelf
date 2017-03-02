@@ -4,12 +4,17 @@
              x:Class="MyDigitalShelf.View.ItemDetail"
              Title="Item Detail">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" x:Name="SearchItemButton" />
         <ToolbarItem Text="Save" x:Name="SaveButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10">
                 <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                <Label Text="Date:"/>
+                <Entry Text="{Binding Item.Date}"/>
+                <Label Text="Source Type:"/>
+                <Entry Text="{Binding Item.Source}" />
                 <Label Text="Name:"/>
                 <Entry Text="{Binding Item.Name}"/>
                 <Label Text="Description:"/>
@@ -17,17 +22,13 @@
                 <Label Text="Creator:"/>
                 <Entry Text="{Binding Item.Writer}"/>
                 <Label Text="Publishing Company:"/>
-                <Entry Text="{Binding Item.PublishingCompany}"/>
-                <Label Text="Link:"/>
-                <Entry Text="{Binding Item.Link }" Keyboard="Url"/>
-                <Label Text="Image:"/>
-                <Entry Text="{Binding Item.Image}" Keyboard="Url"/>
-                <Label Text="Date:"/>
-                <Entry Text="{Binding Item.Date}"/>
+                <Entry Text="{Binding Item.Publishingcompany}"/>
                 <Label Text="Publishing Date:"/>
                 <Entry Text="{Binding Item.PublishingDate}"/>
-                <Label Text="Source:"/>
-                <Entry Text="{Binding Item.Source}" />
+                <Label Text="Link:"/>
+                <Entry Text="{Binding Item.Link}" Keyboard="Url"/>
+                <Label Text="Image:"/>
+                <Entry Text="{Binding Item.Image}" Keyboard="Url"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

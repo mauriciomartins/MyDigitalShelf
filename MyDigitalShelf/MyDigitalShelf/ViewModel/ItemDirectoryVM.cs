@@ -15,11 +15,18 @@ namespace MyDigitalShelf.model
 {
     class ItemDirectoryVM : ObservableBaseObject
     {
+        private string searchName;
         private Item item;
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
         private bool isBusy = false;
 
+
+        public string SearchName
+        {
+            get { return this.searchName; }
+            set { this.searchName = value; OnPropertyChanged(); }
+        }
 
         public Item Item
         {
@@ -48,6 +55,10 @@ namespace MyDigitalShelf.model
             get;set;
         }
 
+        public Command SearchItemCommand
+        {
+            get;set;
+        }
         public ItemDirectoryVM()
         {
             this.ItemDirectoryService = new ItemDirectoryService();
@@ -56,6 +67,7 @@ namespace MyDigitalShelf.model
             this.LoadItemDirectoryCommand = new Command(()=> LoadDirectory(),()=>!this.IsBusy);
             this.CleanDataCommand         = new Command(() => CleanData(), () => !this.IsBusy);
             this.SaveCommand              = new Command(() => SaveData(), () => !this.IsBusy);
+            this.SearchItemCommand        = new Command(() => SearchItem(), () => !this.IsBusy);
         }
 
         public async void SaveData()
@@ -120,6 +132,39 @@ namespace MyDigitalShelf.model
                     
                     var items =  await this.ItemDirectoryService.GetItems();
                     if (items.Any()) { 
+                        foreach (var Item in items)
+                        {
+                            this.ItemList.Add(Item);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
+
+        public async void SearchItem()
+        {
+            if (!IsBusy)
+            {
+
+                try
+                {
+                    IsBusy = true;
+                    // if (this.ItemList != null && this.ItemList.Any() && this.ItemList.Count > 0)
+                    // {
+                    //this.RemoveAll();
+                    //}
+
+                    var items = await this.ItemDirectoryService.GetItems();
+                    if (items.Any())
+                    {
                         foreach (var Item in items)
                         {
                             this.ItemList.Add(Item);

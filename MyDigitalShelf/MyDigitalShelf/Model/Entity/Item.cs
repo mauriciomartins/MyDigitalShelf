@@ -15,6 +15,7 @@ namespace MyDigitalShelf.model
         private int    evaluation;
         private string writer;
         private string publishingcompany;
+        private string publishingDate;
         private string link;
         private string image;
         private string source;
@@ -47,6 +48,13 @@ namespace MyDigitalShelf.model
         {
             get { return this.name; }
             set { this.name = value; OnPropertyChanged(); }
+        }
+
+        [JsonProperty("publishingdate")]
+        public string PublishingDate
+        {
+            get { return this.publishingDate; }
+            set { this.publishingDate = value; OnPropertyChanged(); }
         }
 
         [JsonProperty("description")]
