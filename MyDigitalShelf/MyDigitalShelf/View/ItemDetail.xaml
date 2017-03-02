@@ -12,13 +12,13 @@
             <StackLayout Padding="10">
                 <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 <Label Text="Date:"/>
-                <Entry Text="{Binding Item.Date}"/>
+                <Entry Text="{Binding Item.Date}" />
                 <Label Text="Source Type:"/>
                 <Entry Text="{Binding Item.Source}" />
                 <Label Text="Name:"/>
-                <Entry Text="{Binding Item.Name}"/>
+                <Entry Text="{Binding Item.Name}" x:Name="ItemName"/>
                 <Label Text="Description:"/>
-                <Entry Text="{Binding Item.Description}"/>
+                <Entry Text="{Binding Item.Description}" x:Name="ItemDescription"/>
                 <Label Text="Creator:"/>
                 <Entry Text="{Binding Item.Writer}"/>
                 <Label Text="Publishing Company:"/>

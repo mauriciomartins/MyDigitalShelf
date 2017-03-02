@@ -15,10 +15,10 @@
             <forms:CarouselView x:Name="MyItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <forms:CarouselView.ItemTemplate >
                     <DataTemplate>
-                        <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
+                        <ScrollView  >
                             <StackLayout Padding="10" >
                                 <Label  TextColor="Gray" Text="{Binding Source}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
-                                <Image Source="{Binding Image}"   />
+                                <Image Source="{Binding Image}"  VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
                                 <Label  TextColor="Gray" Text="{Binding Date}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
                                 <Label  TextColor="Blue" Text="{Binding Name}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
                                 <Button  x:Name="MyNotesButton" Image="https://goo.gl/u2Hnsp" Text="My Notes" Clicked="ItemList_ItemSelected" />

@@ -2,9 +2,11 @@
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using MyDigitalShelf.model;
+using MyDigitalShelf.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,5 +91,18 @@ namespace MyDigitalShelf.Model.Service
             await SyncAsync();
         }
 
+
+        public async Task<SearchingInfoDTO> GetBooks(string searchName)
+        {
+            SearchingInfoDTO searchInfo;
+            var URLWebAPI = "https://www.googleapis.com/books/v1/volumes?q="+searchName;
+            Debug.WriteLine("GetBooks?" + URLWebAPI);
+            using (var Client = new System.Net.Http.HttpClient())
+            {
+                var JSON = await Client.GetStringAsync(URLWebAPI);
+                searchInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<SearchingInfoDTO>(JSON);
+            }
+            return searchInfo;
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace MyDigitalShelf.model
                     IsBusy = true;
                     if(this.ItemList!=null&& this.ItemList.Any()&& this.ItemList.Count>0)
                     {
-                        this.RemoveAll();
+                        this.RemoveAll(this.ItemList);
                         await this.ItemDirectoryService.CleanData();
                     }
 
@@ -157,17 +157,44 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    // if (this.ItemList != null && this.ItemList.Any() && this.ItemList.Count > 0)
-                    // {
-                    //this.RemoveAll();
-                    //}
-
-                    var items = await this.ItemDirectoryService.GetItems();
-                    if (items.Any())
+                    if (this.ItemList != null && this.ItemList.Any() && this.ItemList.Count > 0)
                     {
-                        foreach (var Item in items)
+                        this.RemoveAll(this.ItemList);
+                    }
+
+                    if (this.SearchName==null||this.SearchName.Length == 0)
+                    {
+                        IsBusy = false;
+                        await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Erro!", "Nenhuma informação foi informada!", "OK");
+                    }else { 
+                        var items = await this.ItemDirectoryService.GetBooks(SearchName);
+                        if (items!=null)
                         {
-                            this.ItemList.Add(Item);
+                            foreach (var book in items.Books)
+                            {
+                                if (book.VolumeInfo != null)
+                                {
+                                    Item item = new Item();
+                                    item.Date = DateTime.Today.Year.ToString();
+                                    item.Name = book.VolumeInfo.Name;
+                                    item.Description = book.VolumeInfo.Description;
+                                    item.Publishingcompany = book.VolumeInfo.Publishingcompany;
+                                    item.PublishingDate = book.VolumeInfo.PublishingDate;
+                                    if (book.VolumeInfo.Writers!=null)
+                                    {
+                                        item.Writer = string.Join(",", book.VolumeInfo.Writers.ToArray());
+                                    }
+                                    if (book.VolumeInfo.Image != null)
+                                    {
+                                        item.Image = book.VolumeInfo.Image.Thumbnail;
+                                    }
+                                
+                                    item.Link = book.VolumeInfo.Link;
+                                    item.Source = "Livro";
+                                    this.ItemList.Add(item);
+                                }
+                            
+                            }
                         }
                     }
                 }
@@ -182,12 +209,14 @@ namespace MyDigitalShelf.model
             }
         }
 
-        public  void RemoveAll()
+        private void RemoveAll(ObservableCollection<Item> itemList)
         {
-            while (this.ItemList.Count > 0)
+            while (itemList.Count > 0)
             {
-                ItemList.RemoveAt(this.ItemList.Count - 1);
+                itemList.RemoveAt(itemList.Count - 1);
             }
         }
+
+       
     }
 }

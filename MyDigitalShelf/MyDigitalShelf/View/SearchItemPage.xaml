@@ -8,7 +8,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Entry Placeholder="Ex. Digital Fortress" Text="{Binding searchName}"/>
+            <Entry Placeholder="Ex. Digital Fortress" Text="{Binding SearchName}"/>
             <Button Text="GO" x:Name="SearchButton" Command="{Binding SearchItemCommand}"/>
             <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
             <ListView  x:Name="ItemList" ItemsSource="{Binding ItemList}">

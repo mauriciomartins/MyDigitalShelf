@@ -31,11 +31,22 @@ namespace MyDigitalShelf.View
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            itemDirectoryVM.SaveData();
-            await Task.Delay(2000);
-            Page page = await Navigation.PopAsync();
-            NavigationPage navPage = (NavigationPage)App.Current.MainPage;
-            ((MainPage)navPage.CurrentPage).Refresh();
+            if (this.ItemName.Text==null||this.ItemName.Text.Length==0)
+            {
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Erro!", "Nenhum nome foi informado!", "OK");
+            }
+            else if (this.ItemDescription.Text == null || this.ItemDescription.Text.Length == 0)
+            {
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Erro!", "Nenhuma descrição foi informada", "OK");
+            }
+            else
+            {
+                itemDirectoryVM.SaveData();
+                await Task.Delay(3000);
+                Page page = await Navigation.PopAsync();
+                NavigationPage navPage = (NavigationPage)App.Current.MainPage;
+                ((MainPage)navPage.CurrentPage).Refresh();
+            }
         }
     }
 }

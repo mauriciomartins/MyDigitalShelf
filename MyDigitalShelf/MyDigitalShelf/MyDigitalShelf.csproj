@@ -38,6 +38,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entity\DTO\BookImageDTO.cs" />
+    <Compile Include="Model\Entity\DTO\SearchingInfoDTO.cs" />
+    <Compile Include="Model\Entity\DTO\VolumeInfoDTO.cs" />
+    <Compile Include="Model\Entity\DTO\BookDTO.cs" />
     <Compile Include="Model\Entity\Directory\ContentDirectory.cs" />
     <Compile Include="Model\Entity\Directory\CategoryDirectory.cs" />
     <Compile Include="Model\Entity\Notes.cs" />
