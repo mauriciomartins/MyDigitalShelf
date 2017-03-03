@@ -16,7 +16,8 @@ namespace MyDigitalShelf.model
     class ItemDirectoryVM : ObservableBaseObject
     {
         private string searchName;
-        private Item item;
+        private Item   item;
+        private string userId;
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
         private bool isBusy = false;
@@ -26,6 +27,12 @@ namespace MyDigitalShelf.model
         {
             get { return this.searchName; }
             set { this.searchName = value; OnPropertyChanged(); }
+        }
+
+        public string UserId
+        {
+            get { return this.userId; }
+            set { this.userId = value; OnPropertyChanged(); }
         }
 
         public Item Item
@@ -83,9 +90,8 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    this.item.UserId = "df258d04-d3da-4380-a528-113d34d9e26c";
+                    this.item.UserId = this.userId;
                     this.ItemDirectoryService.saveItem(this.item);
-                    this.item = new Item();
                     IsBusy = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
@@ -157,7 +163,6 @@ namespace MyDigitalShelf.model
                         await this.ItemDirectoryService.CleanData();
                     }
 
-                    
                     var items =  await this.ItemDirectoryService.GetItems();
                     if (items.Any()) { 
                         foreach (var Item in items)

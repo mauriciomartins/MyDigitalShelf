@@ -14,11 +14,14 @@ namespace MyDigitalShelf.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemDetail : ContentPage
     {
+        private bool isNew;
         private ItemDirectoryVM itemDirectoryVM = new ItemDirectoryVM();
-        public ItemDetail(Item item)
+        public ItemDetail(string userId,Item item)
         {
             InitializeComponent();
-            itemDirectoryVM.Item = item;
+            this.itemDirectoryVM.UserId = userId;
+            this.itemDirectoryVM.Item   = item;
+            this.isNew = (item.Id == null || item.Id.Length == 0);
             this.BindingContext = itemDirectoryVM;
             this.SaveButton.Clicked         += SaveButton_Clicked;
             this.SearchItemButton.Clicked   += SearchItemButton_Clicked;
@@ -34,10 +37,9 @@ namespace MyDigitalShelf.View
             else
             {
                 itemDirectoryVM.DeleteData();
-                await Task.Delay(3000);
                 Page page = await Navigation.PopAsync();
                 NavigationPage navPage = (NavigationPage)App.Current.MainPage;
-                ((MainPage)navPage.CurrentPage).Refresh();
+                ((MainPage)navPage.CurrentPage).RemoveItem(this.itemDirectoryVM.Item);
             }
         }
 
@@ -59,10 +61,12 @@ namespace MyDigitalShelf.View
             else
             {
                 itemDirectoryVM.SaveData();
-                await Task.Delay(3000);
                 Page page = await Navigation.PopAsync();
-                NavigationPage navPage = (NavigationPage)App.Current.MainPage;
-                ((MainPage)navPage.CurrentPage).Refresh();
+                if (this.isNew)
+                {
+                    NavigationPage navPage = (NavigationPage)App.Current.MainPage;
+                    ((MainPage)navPage.CurrentPage).AppedItem(this.itemDirectoryVM.Item);
+                }
             }
         }
     }

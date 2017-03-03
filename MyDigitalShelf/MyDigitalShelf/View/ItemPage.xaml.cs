@@ -12,8 +12,8 @@ using Xamarin.Forms;
 namespace MyDigitalShelf
 {
     public partial class MainPage : ContentPage
-    {
-        ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
+    {   private string userId = "df258d04-d3da-4380-a528-113d34d9e26c";
+        private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
         public MainPage()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace MyDigitalShelf
         {
             Item newItem = new Item();
             newItem.Date = DateTime.Today.Year.ToString();
-            Navigation.PushAsync(new View.ItemDetail(newItem), true);
+            Navigation.PushAsync(new View.ItemDetail(userId,newItem), true);
         }
 
 
@@ -45,7 +45,7 @@ namespace MyDigitalShelf
                 return;
             }
 
-            Navigation.PushAsync(new View.ItemDetail(selectedItem), true);
+            Navigation.PushAsync(new View.ItemDetail(userId,selectedItem), true);
         }
 
 
@@ -61,12 +61,14 @@ namespace MyDigitalShelf
             Navigation.PushAsync(new View.NotesPage(selectedItem), true);
         }
 
-        protected override void OnDisappearing()
+        public void RemoveItem(Item item)
         {
-            base.OnDisappearing();
-            Debug.WriteLine("{0} MainPage.OnDisappearing", Title);
+            this.ItemDirectoryVM.ItemList.Remove(item);
         }
-    
-       
+
+        public void AppedItem(Item item)
+        {
+            this.ItemDirectoryVM.ItemList.Add(item);
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDigitalShelf.View.NotesDetailPage"
+              Title="Notes Detail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" x:Name="DeleteButton"  />
+        <ToolbarItem Text="Save"   x:Name="SaveButton" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                <Label Text="Description:"/>
+                <Entry Text="{Binding Notes.Description}" x:Name="NotesDescription"/>
+                <Label Text="Link:"/>
+                <Entry Text="{Binding Notes.Link}" Keyboard="Url"/>
+                <Label Text="Image:"/>
+                <Entry Text="{Binding Notes.Image}" Keyboard="Url"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

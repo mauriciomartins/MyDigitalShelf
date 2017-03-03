@@ -76,9 +76,26 @@ namespace MyDigitalShelf.Model.Service
 
         public async Task AddNotes(Notes Notes)
         {
-            await Table.InsertAsync(Notes);
+            if (Notes.Id == null || Notes.Id == "")
+            {
+                await Table.InsertAsync(Notes);
+            }
+            else
+            {
+                await Table.UpdateAsync(Notes);
+            }
 
             await SyncAsync();
+        }
+
+
+        public async Task DeleteData(Notes notes)
+        {
+            await Table.DeleteAsync(notes);
+            if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
+            {
+                await this.SyncAsync();
+            }
         }
 
     }

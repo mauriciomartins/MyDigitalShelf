@@ -12,6 +12,9 @@ namespace MyDigitalShelf.model
 {
     class NotesDirectoryVM : ObservableBaseObject
     {
+        private Notes notes;
+        private string itemId;
+        private NotesDirectoryService      notesDirectoryService;
         public ObservableCollection<Notes> NotesList { get; set; }
         private bool isBusy = false;
         public bool IsBusy
@@ -27,26 +30,129 @@ namespace MyDigitalShelf.model
 
         public NotesDirectoryVM()
         {
-            this.NotesList = new ObservableCollection<Notes>();
+            this.notesDirectoryService = new NotesDirectoryService();
+            this.NotesList             = new ObservableCollection<Notes>();
             this.IsBusy = false;
-          //  this.LoadContentDirectoryCommand = new Command(() => LoadDirectory(),()=>!this.IsBusy);
+            this.LoadContentDirectoryCommand = new Command(() => LoadDirectory(),()=>!this.IsBusy);
         }
 
-        public async void LoadDirectory(string itemId)
+
+        public Notes Notes
+        {
+            get { return this.notes; }
+            set { this.notes = value; OnPropertyChanged(); }
+        }
+
+        public string ItemId
+        {
+            get { return this.itemId; }
+            set { this.itemId = value; OnPropertyChanged(); }
+        }
+
+        public async void SaveData()
         {
             if (!IsBusy)
             {
-                IsBusy = true;
-
-               
-                var loadDirectory = await new NotesDirectoryService().GetNotes(itemId);
-
-                foreach (var note in loadDirectory)
+                try
                 {
-                    this.NotesList.Add(note);
+                    IsBusy = true;
+                    this.notes.ItemId = this.itemId;
+                    this.notesDirectoryService.saveNotes(this.notes);
+                    IsBusy = false;
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
 
-                IsBusy = false;
+        public async void DeleteData()
+        {
+            if (!IsBusy)
+            {
+                try
+                {
+                    IsBusy = true;
+                    await this.notesDirectoryService.DeleteData(this.Notes);
+                    IsBusy = false;
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
+                }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
+
+        private async void CleanData()
+        {
+            if (!IsBusy)
+            {
+                try
+                {
+                    IsBusy = true;
+                    await this.notesDirectoryService.CleanData();
+                }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+
+        }
+
+        public async void LoadDirectory()
+        {
+            if (!IsBusy)
+            {
+                try
+                {
+                    IsBusy = true;
+                    if (this.NotesList != null && this.NotesList.Any() && this.NotesList.Count > 0)
+                    {
+                        this.RemoveAll(this.NotesList);
+                        await this.notesDirectoryService.CleanData();
+                    }
+
+                    var loadDirectory = await notesDirectoryService.GetNotes(itemId);
+
+                    foreach (var note in loadDirectory)
+                    {
+                        this.NotesList.Add(note);
+                    }
+
+                    IsBusy = false;
+                }
+                catch (Exception e)
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error!", e.Message, "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
+
+        private void RemoveAll(ObservableCollection<Notes> notesList)
+        {
+            while (notesList.Count > 0)
+            {
+                notesList.RemoveAt(notesList.Count - 1);
             }
         }
     }

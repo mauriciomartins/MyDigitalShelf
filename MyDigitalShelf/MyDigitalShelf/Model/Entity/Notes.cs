@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace MyDigitalShelf.model
 {
     [DataTable("notes")]
-    class Notes : ObservableBaseObject, IKeyObject
+    public class Notes : ObservableBaseObject, IKeyObject
     {
         private string description;
         private string link;

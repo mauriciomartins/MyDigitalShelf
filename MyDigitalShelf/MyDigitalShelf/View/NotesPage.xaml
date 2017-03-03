@@ -12,8 +12,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" />
-        <ToolbarItem Text="Add" x:Name="AddItem"/>
+        <ToolbarItem Text="Refresh" Command="{Binding LoadContentDirectoryCommand}"/>
+        <ToolbarItem Text="Edit" x:Name  ="UpdateNote"/>
+        <ToolbarItem Text="Add" x:Name   ="AddNote"/>
     </ContentPage.ToolbarItems>
         <ContentPage.Content>
             <StackLayout>
@@ -23,7 +24,7 @@
                     <DataTemplate>
                         <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
                             <StackLayout Padding="10" >
-                                <Image Source="{Binding Image}"  />
+                                <Image Source="{Binding Image}"   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" />
                                 <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
                              </StackLayout>
                         </ScrollView>
