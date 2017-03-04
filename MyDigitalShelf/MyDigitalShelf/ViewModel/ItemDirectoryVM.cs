@@ -94,7 +94,8 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    this.item.UserId = this.userId;
+                    this.item.UserId = this.UserId;
+                    Debug.WriteLine("### Salva Dados:" + this.UserId);
                     this.ItemDirectoryService.saveItem(this.item);
                     IsBusy = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
@@ -167,7 +168,7 @@ namespace MyDigitalShelf.model
                         await this.ItemDirectoryService.CleanData();
                     }
 
-                    var items =  await this.ItemDirectoryService.GetItems(this.userId);
+                    var items =  await this.ItemDirectoryService.GetItems(this.UserId);
                     if (items.Any()) { 
                         foreach (var Item in items)
                         {

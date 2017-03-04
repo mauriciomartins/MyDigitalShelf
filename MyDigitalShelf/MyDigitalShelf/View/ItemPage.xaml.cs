@@ -12,14 +12,13 @@ using Xamarin.Forms;
 namespace MyDigitalShelf
 {
     public partial class MainPage : ContentPage
-    {   private string userId = "";
-        private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
+    {   private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
         private string id;
 
         public MainPage(string UserId)
         {
             InitializeComponent();
-            ItemDirectoryVM.UserId = UserId;
+            this.ItemDirectoryVM.UserId = UserId;
             this.BindingContext = ItemDirectoryVM;
             this.AddItem.Clicked += AddItem_Clicked;
             this.UpdateItem.Clicked += UpdateItem_Clicked;
@@ -35,7 +34,7 @@ namespace MyDigitalShelf
         {
             Item newItem = new Item();
             newItem.Date = DateTime.Today.Year.ToString();
-            Navigation.PushAsync(new View.ItemDetail(userId,newItem), true);
+            Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, newItem), true);
         }
 
 
@@ -48,7 +47,7 @@ namespace MyDigitalShelf
                 return;
             }
 
-            Navigation.PushAsync(new View.ItemDetail(userId,selectedItem), true);
+            Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, selectedItem), true);
         }
 
 
