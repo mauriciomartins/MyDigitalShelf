@@ -41,6 +41,16 @@ namespace MyDigitalShelf.model
             set { this.item = value; OnPropertyChanged(); }
         }
 
+        internal int LastPosition()
+        {
+            int position = 1;
+            if (this.ItemList.Any())
+            {
+                position = this.ItemList[ItemList.Count-1].Position+1;
+            }
+            return position;
+        }
+
         public bool IsBusy
         {
             get { return this.isBusy; }

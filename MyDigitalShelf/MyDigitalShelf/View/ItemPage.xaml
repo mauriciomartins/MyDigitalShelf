@@ -18,11 +18,12 @@
                     <DataTemplate>
                         <ScrollView  >
                             <StackLayout Padding="10" >
+                                <Label  TextColor="Gray" Text="{Binding Position}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
                                 <Label  TextColor="Gray" Text="{Binding Source}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>
-                                <Image Source="{Binding Image}"  VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
+                                <Image Source="{Binding Image}"  VerticalOptions="Start"    HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
                                 <Label  TextColor="Gray" Text="{Binding Date}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
                                 <Label  TextColor="Blue" Text="{Binding Name}"              LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
-                                <Button  x:Name="MyNotesButton" Image="https://goo.gl/u2Hnsp" Text="My Notes" Clicked="ItemList_ItemSelected" />
+                                <Button  x:Name="MyNotesButton"                             Text="My Notes" Clicked="ItemList_ItemSelected" />
                                 <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
                                 <Label  TextColor="Gray" Text="{Binding Writer}"            LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
                                 <Label  TextColor="Gray" Text="{Binding Publishingcompany}" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium"/>

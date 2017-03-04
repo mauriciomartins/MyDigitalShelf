@@ -12,6 +12,8 @@
     <ScrollView>
         <StackLayout Padding="10">
             <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Label Text="Position:"/>
+            <Entry Text="{Binding Item.Position}" />
             <Label Text="Date:"/>
             <Entry Text="{Binding Item.Date}" />
             <Label Text="Source Type:"/>
