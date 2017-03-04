@@ -163,7 +163,7 @@ namespace MyDigitalShelf.model
                         await this.ItemDirectoryService.CleanData();
                     }
 
-                    var items =  await this.ItemDirectoryService.GetItems();
+                    var items =  await this.ItemDirectoryService.GetItems(this.userId);
                     if (items.Any()) { 
                         foreach (var Item in items)
                         {

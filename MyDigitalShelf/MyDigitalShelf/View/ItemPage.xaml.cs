@@ -14,15 +14,18 @@ namespace MyDigitalShelf
     public partial class MainPage : ContentPage
     {   private string userId = "df258d04-d3da-4380-a528-113d34d9e26c";
         private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
-        public MainPage()
+        private string id;
+
+        public MainPage(string UserId)
         {
             InitializeComponent();
+            ItemDirectoryVM.UserId = UserId;
             this.BindingContext = ItemDirectoryVM;
             this.AddItem.Clicked += AddItem_Clicked;
             this.UpdateItem.Clicked += UpdateItem_Clicked;
             this.Refresh();
         }
-
+                
         public  void Refresh()
         {
               ItemDirectoryVM.LoadDirectory();

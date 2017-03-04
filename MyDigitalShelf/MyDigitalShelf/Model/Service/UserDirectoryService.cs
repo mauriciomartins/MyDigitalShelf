@@ -6,6 +6,7 @@ using MyDigitalShelf.MyDigitalShelf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,13 +28,13 @@ namespace MyDigitalShelf.Model.Service
             Table = Client.GetSyncTable<User>();
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsers(string email, string password)
         {
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
                 await this.SyncAsync();
             }
-            var Items = await this.GetTable("9d573dfa-bb3f-4eae-ab63-95c126401fd2");
+            var Items = await this.GetTable(email, password);
             return Items.ToList();
         }
 
@@ -53,7 +54,7 @@ namespace MyDigitalShelf.Model.Service
             try
             {
                 await Client.SyncContext.PushAsync();
-                await Table.PullAsync("GetAllCategories", Table.CreateQuery());
+                await Table.PullAsync("GetAllUsers", Table.CreateQuery());
             }
             catch (MobileServicePushFailedException pushError)
             {
@@ -64,9 +65,21 @@ namespace MyDigitalShelf.Model.Service
             }
         }
 
-        public Task<IEnumerable<User>> GetTable(string id)
+        public Task<IEnumerable<User>> GetTable(string email, string password)
         {
-            return Table.Where(c => c.Id == id).ToEnumerableAsync();
+            return Table.Where(c => c.Email == email).Where(c => c.Password == password).ToEnumerableAsync();
+        }
+
+        public async Task<User> LoginUser(string email, string password)
+        {
+            var users = await GetUsers(email, password);
+            Debug.WriteLine("LoginUser:"+ email+" - " + password+ " - " + users.ToList().Count.ToString());
+            User user = null;
+            if (users != null&&users.Any()){
+                user = users.ToList()[0];
+            }
+            return user;
+
         }
 
         public Task<IEnumerable<User>> GetUser(string email,string password)
@@ -76,7 +89,7 @@ namespace MyDigitalShelf.Model.Service
 
         public async Task CleanData()
         {
-            await Table.PurgeAsync("GetAllCategories", Table.CreateQuery(), new System.Threading.CancellationToken());
+            await Table.PurgeAsync("GetAllUsers", Table.CreateQuery(), new System.Threading.CancellationToken());
         }
 
         public async void saveUser(User User)
