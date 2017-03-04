@@ -51,12 +51,12 @@ namespace MyDigitalShelf.View
 
         public void RemoveNote(Notes notes)
         {
-            this.notesDirectoryVM.NotesList.Remove(notes);
+            this.notesDirectoryVM.Remove(notes);
         }
 
         public void AppenNote(Notes notes)
         {
-            this.notesDirectoryVM.NotesList.Add(notes);
+            this.notesDirectoryVM.Add(notes);
          }
     }
 }

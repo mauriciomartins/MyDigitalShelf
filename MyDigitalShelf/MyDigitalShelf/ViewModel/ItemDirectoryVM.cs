@@ -21,7 +21,7 @@ namespace MyDigitalShelf.model
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
         private bool isBusy = false;
-
+        private bool isEmpty = false;
 
         public string SearchName
         {
@@ -46,7 +46,11 @@ namespace MyDigitalShelf.model
             get { return this.isBusy; }
             set { this.isBusy = value; OnPropertyChanged(); }
         }
-
+        public bool IsEmpty
+        {
+            get { return this.isEmpty; }
+            set { this.isEmpty = value; OnPropertyChanged(); }
+        }
         public bool ShowItemsSelectedMenu()
         {
             return item.Id != null && item.Id.Length>0;
@@ -170,6 +174,7 @@ namespace MyDigitalShelf.model
                             this.ItemList.Add(Item);
                         }
                     }
+                    IsEmpty = this.ItemList == null || this.ItemList.Count == 0;
                 }
                 catch (Exception e)
                 {
@@ -251,6 +256,16 @@ namespace MyDigitalShelf.model
             }
         }
 
-       
+        public void Remove(Item item)
+        {
+            this.ItemList.Remove(item);
+            this.IsEmpty = this.ItemList == null || this.ItemList.Count == 0;
+        }
+
+        public void Add(Item item)
+        {
+            this.ItemList.Add(item);
+            this.IsEmpty = this.ItemList == null || this.ItemList.Count == 0;
+        }
     }
 }

@@ -12,7 +12,7 @@ using Xamarin.Forms;
 namespace MyDigitalShelf
 {
     public partial class MainPage : ContentPage
-    {   private string userId = "df258d04-d3da-4380-a528-113d34d9e26c";
+    {   private string userId = "";
         private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
         private string id;
 
@@ -66,12 +66,12 @@ namespace MyDigitalShelf
 
         public void RemoveItem(Item item)
         {
-            this.ItemDirectoryVM.ItemList.Remove(item);
+            this.ItemDirectoryVM.Remove(item);
         }
 
         public void AppedItem(Item item)
         {
-            this.ItemDirectoryVM.ItemList.Add(item);
+            this.ItemDirectoryVM.Add(item);
         }
     }
 }

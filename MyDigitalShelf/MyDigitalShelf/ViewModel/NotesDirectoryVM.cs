@@ -17,12 +17,17 @@ namespace MyDigitalShelf.model
         private NotesDirectoryService      notesDirectoryService;
         public ObservableCollection<Notes> NotesList { get; set; }
         private bool isBusy = false;
+        private bool isEmpty = false;
         public bool IsBusy
         {
             get { return this.isBusy; }
             set { this.isBusy = value; OnPropertyChanged(); }
         }
-
+        public bool IsEmpty
+        {
+            get { return this.isEmpty; }
+            set { this.isEmpty = value; OnPropertyChanged(); }
+        }
         public Command LoadContentDirectoryCommand
         {
             get; set;
@@ -49,6 +54,18 @@ namespace MyDigitalShelf.model
             set { this.itemId = value; OnPropertyChanged(); }
         }
 
+        internal void Remove(Notes notes)
+        {
+            this.NotesList.Remove(notes);
+            this.IsEmpty = this.NotesList == null || this.NotesList.Count == 0;
+        }
+
+        internal void Add(Notes notes)
+        {
+            this.NotesList.Add(notes);
+            this.IsEmpty = this.NotesList == null || this.NotesList.Count == 0;
+        }
+
         public async void SaveData()
         {
             if (!IsBusy)
@@ -58,7 +75,7 @@ namespace MyDigitalShelf.model
                     IsBusy = true;
                     this.notes.ItemId = this.itemId;
                     this.notesDirectoryService.saveNotes(this.notes);
-                    IsBusy = false;
+                    IsBusy  = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
                 catch (Exception e)
@@ -80,7 +97,7 @@ namespace MyDigitalShelf.model
                 {
                     IsBusy = true;
                     await this.notesDirectoryService.DeleteData(this.Notes);
-                    IsBusy = false;
+                    IsBusy  = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
                 catch (Exception e)
@@ -134,7 +151,7 @@ namespace MyDigitalShelf.model
                     {
                         this.NotesList.Add(note);
                     }
-
+                    IsEmpty = this.NotesList == null || this.NotesList.Count == 0;
                     IsBusy = false;
                 }
                 catch (Exception e)

@@ -12,7 +12,11 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout    Padding="10"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-            <forms:CarouselView x:Name="MyItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="10" IsVisible="{Binding IsEmpty}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Image   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
+                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large" />
+            </StackLayout>
+            <forms:CarouselView x:Name="MyItemList" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding !IsEmpty}">
                 <forms:CarouselView.ItemTemplate >
                     <DataTemplate>
                         <ScrollView  >
