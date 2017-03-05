@@ -7,8 +7,10 @@
              Title="My Shelf">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh" Command="{Binding LoadItemDirectoryCommand}"/>
-        <ToolbarItem Text="Edit" x:Name="UpdateItem"/>
-        <ToolbarItem Text="Add" x:Name   ="AddItem"/>
+        <ToolbarItem Text="Edit Item" x:Name="UpdateItem" Order="Secondary"/>
+        <ToolbarItem Text="Add Item" x:Name   ="AddItem" Order="Secondary"/>
+        <ToolbarItem Text="Add Category" x:Name="AddCategoryButton" Order="Secondary"/>
+        <ToolbarItem Text="Logout" x:Name="LogoutButton" Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout    Padding="10"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
