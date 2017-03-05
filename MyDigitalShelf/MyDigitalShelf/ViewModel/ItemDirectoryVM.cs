@@ -61,6 +61,7 @@ namespace MyDigitalShelf.model
             get { return this.isEmpty; }
             set { this.isEmpty = value; OnPropertyChanged(); }
         }
+
         public bool ShowItemsSelectedMenu()
         {
             return item.Id != null && item.Id.Length>0;

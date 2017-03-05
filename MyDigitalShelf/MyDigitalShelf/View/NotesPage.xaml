@@ -45,9 +45,9 @@
                 >
                 <forms:CarouselView.ItemTemplate >
                     <DataTemplate>
-                        <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
+                        <ScrollView >
                             <StackLayout Padding="10" >
-                                <Image Source="{Binding Image}"   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" />
+                                <Image Source="{Binding Image}" IsVisible="{Binding !IsEmptyImage}"   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" />
                                 <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
                             </StackLayout>
                         </ScrollView>

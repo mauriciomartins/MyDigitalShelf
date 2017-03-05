@@ -21,9 +21,20 @@ namespace MyDigitalShelf
             this.ItemDirectoryVM.UserId = UserId;
             this.BindingContext = ItemDirectoryVM;
             this.AddItem.Clicked += AddItem_Clicked;
+            this.LogoutButton.Clicked += LogoutButton_Clicked;
             this.Refresh();
         }
-                
+
+        private async void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            var answer =  await DisplayAlert("Logout", "Would you like to logout?", "Yes", "Cancel");
+            if (answer)
+            {
+                await Navigation.PushAsync(new LoginPage());
+                Navigation.RemovePage(this);
+            }
+        }
+
         public  void Refresh()
         {
               ItemDirectoryVM.LoadDirectory();

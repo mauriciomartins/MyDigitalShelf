@@ -20,7 +20,7 @@ namespace MyDigitalShelf.model
         private bool isBusy = false;
         private bool isEmpty = false;
         private Item item;
-
+        private bool isEmptyImage;
         public bool IsBusy
         {
             get { return this.isBusy; }
@@ -49,6 +49,12 @@ namespace MyDigitalShelf.model
         {
             get { return this.notes; }
             set { this.notes = value; OnPropertyChanged(); }
+        }
+
+        public bool IsEmptyImage
+        {
+            get { return this.isEmptyImage; }
+            set { this.isEmptyImage = value; OnPropertyChanged(); }
         }
 
         public string ItemId

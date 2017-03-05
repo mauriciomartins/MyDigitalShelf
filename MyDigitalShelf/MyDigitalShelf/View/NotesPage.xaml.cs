@@ -19,6 +19,7 @@ namespace MyDigitalShelf.View
         {
             InitializeComponent();
             this.notesDirectoryVM.Item   = item;
+            this.notesDirectoryVM.IsEmptyImage = item.Image == null || item.Image.Length == 0; 
             this.notesDirectoryVM.ItemId = item.Id;
             this.BindingContext   = notesDirectoryVM;
             this.AddNote.Clicked += AddItem_Clicked;
