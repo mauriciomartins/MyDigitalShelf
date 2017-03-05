@@ -17,20 +17,39 @@
         <ToolbarItem Text="Add" x:Name   ="AddNote"/>
     </ContentPage.ToolbarItems>
         <ContentPage.Content>
-            <StackLayout>
-            <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
+        <StackLayout >
+            <Image
+                Margin="20"  
+                Source="{Binding Item.Image}"  
+                VerticalOptions="Start"   
+                HorizontalOptions="Center" 
+                HeightRequest="100" 
+                WidthRequest="100"/>
+            <Label  
+                TextColor="Blue" 
+                Text="{Binding Item.Name}"              
+                LineBreakMode="WordWrap" 
+                HorizontalTextAlignment="Center" 
+                VerticalTextAlignment="Center"  FontSize="Small" />
+            <ActivityIndicator 
+                IsRunning="{Binding IsBusy}"  
+                IsVisible="{Binding IsBusy}"/>
             <StackLayout Padding="10" IsVisible="{Binding IsEmpty}">
-                <Image Source="{Binding Image}"   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" />
-                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"      LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
+                <Image  VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200" />
+                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"      LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Small" />
             </StackLayout>
-            <forms:CarouselView x:Name="NotesList" ItemsSource="{Binding NotesList}" IsVisible="{Binding !IsEmpty}">
+            <forms:CarouselView 
+                x:Name="NotesList" 
+                ItemsSource="{Binding NotesList}" 
+                IsVisible="{Binding !IsEmpty}"
+                >
                 <forms:CarouselView.ItemTemplate >
                     <DataTemplate>
                         <ScrollView AbsoluteLayout.LayoutBounds=".5,.8,1,.5" AbsoluteLayout.LayoutFlags="All" >
                             <StackLayout Padding="10" >
                                 <Image Source="{Binding Image}"   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" />
                                 <Label  TextColor="Gray" Text="{Binding Description}"       LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Medium" />
-                             </StackLayout>
+                            </StackLayout>
                         </ScrollView>
                     </DataTemplate>
                 </forms:CarouselView.ItemTemplate>

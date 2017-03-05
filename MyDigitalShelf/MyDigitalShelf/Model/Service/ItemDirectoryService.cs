@@ -59,7 +59,7 @@ namespace MyDigitalShelf.Model.Service
 
         public Task<IEnumerable<Item>> GetTable(string user_id)
         {
-            return Table.Where(c=>c.UserId==user_id).OrderBy(c => c.Position).ToEnumerableAsync();
+            return Table.Where(c=>c.UserId==user_id).OrderByDescending(c => c.Position).ToEnumerableAsync();
         }
 
         public async Task CleanData()

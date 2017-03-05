@@ -3,6 +3,7 @@ using MyDigitalShelf.Model.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace MyDigitalShelf.model
         public ObservableCollection<Notes> NotesList { get; set; }
         private bool isBusy = false;
         private bool isEmpty = false;
+        private Item item;
+
         public bool IsBusy
         {
             get { return this.isBusy; }
@@ -52,6 +55,12 @@ namespace MyDigitalShelf.model
         {
             get { return this.itemId; }
             set { this.itemId = value; OnPropertyChanged(); }
+        }
+
+        public Item Item
+        {
+            get { return this.item; }
+            set { this.item = value; OnPropertyChanged(); }
         }
 
         internal void Remove(Notes notes)
@@ -144,9 +153,9 @@ namespace MyDigitalShelf.model
                         this.RemoveAll(this.NotesList);
                         await this.notesDirectoryService.CleanData();
                     }
-
-                    var loadDirectory = await notesDirectoryService.GetNotes(itemId);
-
+                    Debug.WriteLine("Notes.LoadDirectory() id:"+ itemId);
+                    var loadDirectory = await notesDirectoryService.GetNotes(item.Id);
+                    Debug.WriteLine("Notes.LoadDirectory() count:" + loadDirectory.Count);
                     foreach (var note in loadDirectory)
                     {
                         this.NotesList.Add(note);

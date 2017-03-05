@@ -21,7 +21,6 @@ namespace MyDigitalShelf
             this.ItemDirectoryVM.UserId = UserId;
             this.BindingContext = ItemDirectoryVM;
             this.AddItem.Clicked += AddItem_Clicked;
-            this.UpdateItem.Clicked += UpdateItem_Clicked;
             this.Refresh();
         }
                 
@@ -36,32 +35,19 @@ namespace MyDigitalShelf
             newItem.Position = this.ItemDirectoryVM.LastPosition();
             newItem.Date = DateTime.Today.Year.ToString();
             Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, newItem), true);
+           
         }
 
-
-        private void UpdateItem_Clicked(object sender, EventArgs e)
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            Item selectedItem = (Item)this.MyItemList.Item;
+            Item selectedItem = (Item)this.MyItemList.SelectedItem;
 
             if (selectedItem == null)
             {
                 return;
             }
-
-            Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, selectedItem), true);
-        }
-
-
-        private void ItemList_ItemSelected(object sender, EventArgs e)
-        {
-            Item selectedItem = (Item)this.MyItemList.Item;
-
-            if (selectedItem == null)
-            {
-                return;
-            }
-
-            Navigation.PushAsync(new View.NotesPage(selectedItem), true);
+            Navigation.PushAsync(new View.ItemViewPage(this.ItemDirectoryVM.UserId, selectedItem), true);
+            this.MyItemList.SelectedItem = null;
         }
 
         public void RemoveItem(Item item)

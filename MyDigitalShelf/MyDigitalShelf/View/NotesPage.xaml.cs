@@ -18,6 +18,7 @@ namespace MyDigitalShelf.View
          public NotesPage(Item item)
         {
             InitializeComponent();
+            this.notesDirectoryVM.Item   = item;
             this.notesDirectoryVM.ItemId = item.Id;
             this.BindingContext   = notesDirectoryVM;
             this.AddNote.Clicked += AddItem_Clicked;

@@ -28,13 +28,13 @@ namespace MyDigitalShelf.Model.Service
             Table = Client.GetSyncTable<Notes>();
         }
 
-        public async Task<List<Notes>> GetNotes(string userId)
+        public async Task<List<Notes>> GetNotes(string itemId)
         {
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
                 await this.SyncAsync();
             }
-            var Notess = await this.GetTable(userId);    
+            var Notess = await this.GetTable(itemId);    
             return Notess.ToList();
         }
 

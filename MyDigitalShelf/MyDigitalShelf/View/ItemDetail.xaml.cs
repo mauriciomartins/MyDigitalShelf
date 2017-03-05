@@ -37,7 +37,7 @@ namespace MyDigitalShelf.View
             else
             {
                 itemDirectoryVM.DeleteData();
-                Page page = await Navigation.PopAsync();
+                await Navigation.PopToRootAsync();
                 NavigationPage navPage = (NavigationPage)App.Current.MainPage;
                 ((MainPage)navPage.CurrentPage).RemoveItem(this.itemDirectoryVM.Item);
             }
