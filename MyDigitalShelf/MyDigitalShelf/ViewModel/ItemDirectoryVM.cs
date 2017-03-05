@@ -15,7 +15,7 @@ namespace MyDigitalShelf.model
 {
     class ItemDirectoryVM : ObservableBaseObject
     {
-        private string searchName;
+        private string searchName="";
         private Item   item;
         private string userId;
         private ItemDirectoryService ItemDirectoryService;
@@ -179,10 +179,12 @@ namespace MyDigitalShelf.model
                         await this.ItemDirectoryService.CleanData();
                     }
 
-                    var items =  await this.ItemDirectoryService.GetItems(this.UserId);
+                    var items =  await this.ItemDirectoryService.GetItems(this.UserId, SearchName.Replace(" ", "+"));
                     if (items.Any()) { 
                         foreach (var Item in items)
                         {
+                            Item.IsMine   = true;
+                            Item.IsStored = true;
                             this.ItemList.Add(Item);
                         }
                     }
@@ -241,7 +243,9 @@ namespace MyDigitalShelf.model
                                     }
                                 
                                     item.Link = book.VolumeInfo.Link;
-                                    item.Source = "Livro";
+                                    item.Source   = "Livro";
+                                    item.IsMine   = false;
+                                    item.IsStored = false;
                                     this.ItemList.Add(item);
                                 }
                             

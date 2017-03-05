@@ -7,11 +7,24 @@
         <ToolbarItem Text="Select" x:Name="SelectItemButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Entry Placeholder="Ex. Digital Fortress" Text="{Binding SearchName}"/>
-            <Button Text="GO" x:Name="SearchButton" Command="{Binding SearchItemCommand}"/>
-            <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
-            <ListView  x:Name="ItemList" ItemsSource="{Binding ItemList}">
+        <StackLayout >
+            <StackLayout Padding="10" Orientation="Horizontal"  HorizontalOptions="Fill"  >
+                <Entry Placeholder="Ex. Digital Fortress"   Text="{Binding SearchName}" HorizontalOptions="FillAndExpand"/>
+                <Button Text="GO" x:Name="SearchButton" Command="{Binding SearchItemCommand}" HorizontalOptions="End"/>
+            </StackLayout>
+            <ListView 
+                Margin="10,10,10,10" 
+                x:Name="ItemList" 
+                ItemsSource="{Binding ItemList}"
+                AbsoluteLayout.LayoutFlags="All" 
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding SearchItemCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected   ="OnItemSelected"
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell  ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Writer}" />

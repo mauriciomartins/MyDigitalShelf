@@ -11,31 +11,36 @@
         <ToolbarItem Text="Logout" x:Name="LogoutButton" Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout    Padding="10"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout>
+            <StackLayout Padding="10" Orientation="Horizontal"  HorizontalOptions="Fill"  >
+                <Entry Placeholder="Ex. Digital Fortress"   Text="{Binding SearchName}" HorizontalOptions="FillAndExpand"/>
+                <Button Text="GO" x:Name="SearchButton" Command="{Binding LoadItemDirectoryCommand}" HorizontalOptions="End"/>
+            </StackLayout>
             <ListView 
-                x:Name="MyItemList"  
-                ItemsSource="{Binding ItemList}" 
-                AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                AbsoluteLayout.LayoutFlags="All" 
-                IsVisible="{Binding !IsEmpty}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemDirectoryCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-				ItemSelected="OnItemSelected">
+                    x:Name="MyItemList"  
+                    ItemsSource="{Binding ItemList}" 
+                    AbsoluteLayout.LayoutFlags="All" 
+                    IsVisible="{Binding !IsEmpty}"
+                    VerticalOptions="FillAndExpand"
+                    HasUnevenRows="true"
+                    RefreshCommand="{Binding LoadItemDirectoryCommand}"
+                    IsPullToRefreshEnabled="true"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                    CachingStrategy="RecycleElement"
+				    ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate  >
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Writer}"  TextColor="Blue" DetailColor="Navy"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
-            <StackLayout Padding="10" IsVisible="{Binding IsEmpty}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <Image   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
-                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large" />
-            </StackLayout>
-        </AbsoluteLayout>
+            <StackLayout 
+                Padding="10" 
+                IsVisible="{Binding IsEmpty}" 
+                VerticalOptions="FillAndExpand">
+                    <Image   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
+                    <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large" />
+                </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

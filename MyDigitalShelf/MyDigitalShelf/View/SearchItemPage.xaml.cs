@@ -44,5 +44,17 @@ namespace MyDigitalShelf.View
                 Page page = await Navigation.PopAsync();
             }
         }
+
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Item selectedItem = (Item)this.ItemList.SelectedItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+            Navigation.PushModalAsync(new View.ItemViewPage(this.ItemDirectoryVM.UserId, selectedItem), true);
+            
+        }
     }
 }

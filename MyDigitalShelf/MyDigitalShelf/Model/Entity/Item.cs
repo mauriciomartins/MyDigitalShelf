@@ -21,6 +21,8 @@ namespace MyDigitalShelf.model
         private string source;
         private int position;
         private string userId;
+        private bool isMine;
+        private bool isStored;
 
         [JsonProperty("position")]
         public int Position
@@ -112,6 +114,18 @@ namespace MyDigitalShelf.model
         {
             get { return this.source; }
             set { this.source = value; OnPropertyChanged(); }
+        }
+
+        public bool IsMine
+        {
+            get { return this.isMine; }
+            set { this.isMine = value; OnPropertyChanged(); }
+        }
+
+        public bool IsStored
+        {
+            get { return this.isStored; }
+            set { this.isStored = value; OnPropertyChanged(); }
         }
 
         public string Key

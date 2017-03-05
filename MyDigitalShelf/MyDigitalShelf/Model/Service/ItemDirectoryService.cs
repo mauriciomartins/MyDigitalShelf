@@ -30,13 +30,13 @@ namespace MyDigitalShelf.Model.Service
             Table = Client.GetSyncTable<Item>();
         }
 
-        public async Task<List<Item>> GetItems(string userId)
+        public async Task<List<Item>> GetItems(string userId,string searchName)
         {
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
                 await this.SyncAsync();
             }
-            var Items = await this.GetTable(userId);    
+            var Items = await this.GetTable(userId, searchName);    
             return Items.ToList();
         }
 
@@ -57,9 +57,9 @@ namespace MyDigitalShelf.Model.Service
             }
         }
 
-        public Task<IEnumerable<Item>> GetTable(string user_id)
+        public Task<IEnumerable<Item>> GetTable(string user_id, string searchName)
         {
-            return Table.Where(c=>c.UserId==user_id).OrderByDescending(c => c.Position).ToEnumerableAsync();
+            return Table.Where(c=>c.UserId==user_id).Where(c => c.Name.Contains(searchName)).OrderByDescending(c => c.Position).ToEnumerableAsync();
         }
 
         public async Task CleanData()
