@@ -24,6 +24,19 @@ namespace MyDigitalShelf.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
+
+        public async override void OnBackPressed()
+        {
+            bool? result = await App.CallHardwareBackPressed();
+            if (result == true)
+            {
+                base.OnBackPressed();
+            }
+            else if (result == null)
+            {
+                Finish();
+            }
+        }
     }
 }
 

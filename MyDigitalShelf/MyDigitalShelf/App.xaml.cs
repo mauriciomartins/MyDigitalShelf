@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MyDigitalShelf
@@ -31,6 +31,33 @@ namespace MyDigitalShelf
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public static async Task<bool?> CallHardwareBackPressed()
+        {
+            Func<Task<bool?>> backPressed = HardwareBackPressed;
+            if (backPressed != null)
+            {
+                return await backPressed();
+            }
+
+            return true;
+        }
+
+        public static Func<Task<bool?>> HardwareBackPressed
+        {
+            private get;
+            set;
+        }
+
+        protected virtual void OnAppearing()
+        {
+            App.HardwareBackPressed = () => Task.FromResult<bool?>(null);
+        }
+        
+        protected virtual void OnDisappearing()
+        {
+            App.HardwareBackPressed = null;
         }
     }
 }

@@ -25,14 +25,9 @@ namespace MyDigitalShelf
             this.Refresh();
         }
 
-        private async void LogoutButton_Clicked(object sender, EventArgs e)
+        private  void LogoutButton_Clicked(object sender, EventArgs e)
         {
-            var answer =  await DisplayAlert("Logout", "Would you like to logout?", "Yes", "Cancel");
-            if (answer)
-            {
-                await Navigation.PushAsync(new LoginPage());
-                Navigation.RemovePage(this);
-            }
+            GoBack();
         }
 
         public  void Refresh()
@@ -70,5 +65,24 @@ namespace MyDigitalShelf
         {
             this.ItemDirectoryVM.Add(item);
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            this.GoBack();
+
+            return true;
+        }
+
+        private async void GoBack()
+        {
+            var answer = await DisplayAlert("Logout", "Would you like to logout?", "Yes", "Cancel");
+            if (answer)
+            {
+                await Navigation.PushAsync(new LoginPage());
+                Navigation.RemovePage(this);
+            }
+        }
+
+       
     }
 }
