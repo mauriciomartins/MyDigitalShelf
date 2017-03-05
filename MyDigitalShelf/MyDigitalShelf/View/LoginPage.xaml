@@ -4,7 +4,8 @@
              x:Class="MyDigitalShelf.View.LoginPage">
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Label Text="MyDigitalShelf" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="35" />
+            <Label Text="MyDigitalShelf" Margin="0,40,0,30"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="40" />
+            <Label Text="Iniciar sessão" Margin="0,10,0,10" LineBreakMode="WordWrap" VerticalTextAlignment="Center"  FontSize="Large" />
             <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" />
             <Label Text="Email:"/>
             <Entry Text="{Binding Email}" />
