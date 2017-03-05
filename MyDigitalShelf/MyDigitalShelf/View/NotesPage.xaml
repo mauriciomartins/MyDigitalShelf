@@ -34,9 +34,8 @@
             <ActivityIndicator 
                 IsRunning="{Binding IsBusy}"  
                 IsVisible="{Binding IsBusy}"/>
-            <StackLayout Padding="10" IsVisible="{Binding IsEmpty}">
-                <Image  VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200" />
-                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"      LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Small" />
+            <StackLayout Padding="10" IsVisible="{Binding IsEmpty}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"    LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Small" />
             </StackLayout>
             <forms:CarouselView 
                 x:Name="NotesList" 
