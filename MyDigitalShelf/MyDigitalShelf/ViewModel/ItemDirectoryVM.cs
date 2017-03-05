@@ -46,7 +46,7 @@ namespace MyDigitalShelf.model
             int position = 1;
             if (this.ItemList.Any())
             {
-                position = this.ItemList[ItemList.Count-1].Position+1;
+                position = this.ItemList[0].Position+1;
             }
             return position;
         }
@@ -106,7 +106,6 @@ namespace MyDigitalShelf.model
                 {
                     IsBusy = true;
                     this.item.UserId = this.UserId;
-                    Debug.WriteLine("### Salva Dados:" + this.UserId);
                     this.ItemDirectoryService.saveItem(this.item);
                     IsBusy = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
@@ -280,7 +279,7 @@ namespace MyDigitalShelf.model
 
         public void Add(Item item)
         {
-            this.ItemList.Add(item);
+            this.ItemList.Insert(0,item);
             this.IsEmpty = this.ItemList == null || this.ItemList.Count == 0;
         }
     }

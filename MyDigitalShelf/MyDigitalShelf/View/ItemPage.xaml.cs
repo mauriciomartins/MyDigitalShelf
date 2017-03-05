@@ -37,9 +37,9 @@ namespace MyDigitalShelf
 
         private void AddItem_Clicked(object sender, EventArgs e)//
         {
-            Item newItem = new Item();
+            Item newItem     = new Item();
             newItem.Position = this.ItemDirectoryVM.LastPosition();
-            newItem.Date = DateTime.Today.Year.ToString();
+            newItem.Date     = DateTime.Today.Year.ToString();
             Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, newItem), true);
            
         }
