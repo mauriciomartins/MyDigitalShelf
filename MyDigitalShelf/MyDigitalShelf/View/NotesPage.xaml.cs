@@ -22,9 +22,22 @@ namespace MyDigitalShelf.View
             this.notesDirectoryVM.IsEmptyImage = item.Image == null || item.Image.Length == 0; 
             this.notesDirectoryVM.ItemId = item.Id;
             this.BindingContext   = notesDirectoryVM;
-            this.AddNote.Clicked += AddItem_Clicked;
-            this.UpdateNote.Clicked += UpdateNote_Clicked;
+            
             this.Refresh();
+            if (item.IsMine && this.ToolbarItems != null)
+            {
+                
+                ToolbarItem UpdateNote = new ToolbarItem() { };
+                UpdateNote.Clicked += UpdateNote_Clicked;
+                UpdateNote.Text = "Edit";
+                ToolbarItems.Add(UpdateNote);
+
+                ToolbarItem AddNote = new ToolbarItem() { };
+                AddNote.Clicked += AddItem_Clicked;
+                AddNote.Text = "Add";
+                ToolbarItems.Add(UpdateNote);
+               
+            }
         }
 
         public void Refresh()

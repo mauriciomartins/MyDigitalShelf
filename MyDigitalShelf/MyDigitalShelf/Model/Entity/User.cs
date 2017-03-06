@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MyDigitalShelf.model
 {
     [DataTable("user")]
-    class User : ObservableBaseObject, IKeyObject
+    public class User : ObservableBaseObject, IKeyObject
     {
         private string name;
         private string email;

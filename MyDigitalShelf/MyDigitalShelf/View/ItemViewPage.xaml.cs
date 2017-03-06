@@ -15,6 +15,8 @@ namespace MyDigitalShelf.View
     {
         private bool isNew;
         private ItemDirectoryVM itemDirectoryVM = new ItemDirectoryVM();
+        private ToolbarItem UpdateItem;
+
         public ItemViewPage(string userId, Item item)
         {
             InitializeComponent();
@@ -22,7 +24,15 @@ namespace MyDigitalShelf.View
             this.itemDirectoryVM.Item = item;
             this.isNew = (item.Id == null || item.Id.Length == 0);
             this.BindingContext = itemDirectoryVM;
-            this.UpdateItem.Clicked += UpdateItem_Clicked;
+           
+            if (item.IsMine&& this.ToolbarItems!=null)
+            {
+                this.ToolbarItems.Clear();
+                this.UpdateItem = new ToolbarItem();
+                this.UpdateItem.Clicked += UpdateItem_Clicked;
+                this.UpdateItem.Text = "Edit";
+                this.ToolbarItems.Add(UpdateItem);
+            }
         }
 
         private void Show_My_Note(object sender, EventArgs e)

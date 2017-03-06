@@ -32,9 +32,9 @@ namespace MyDigitalShelf.Model.Service
         {
             if (Plugin.Connectivity.CrossConnectivity.Current.IsConnected)
             {
-                await this.SyncAsync();
+                await this.MyFriendsSyncAsync();
             }
-            var Items = await this.GetTable(email, password);
+            var Items = await this.GetTableMyFriends(email, password);
             return Items.ToList();
         }
 
@@ -46,6 +46,24 @@ namespace MyDigitalShelf.Model.Service
             }
             var Items = await this.GetUser(email, password);
             return Items.ToList();
+        }
+
+        
+        public async Task MyFriendsSyncAsync()
+        {
+            ReadOnlyCollection<MobileServiceTableOperationError> errors = null;
+            try
+            {
+                await Client.SyncContext.PushAsync();
+                await Table.PullAsync("GetAllMyFriends", Table.CreateQuery());
+            }
+            catch (MobileServicePushFailedException pushError)
+            {
+                if (pushError.PushResult != null)
+                {
+                    errors = pushError.PushResult.Errors;
+                }
+            }
         }
 
         public async Task SyncAsync()
@@ -70,9 +88,14 @@ namespace MyDigitalShelf.Model.Service
             return Table.Where(c => c.Email == email).Where(c => c.Password == password).ToEnumerableAsync();
         }
 
+        public Task<IEnumerable<User>> GetTableMyFriends(string email, string password)
+        {
+            return Table.ToEnumerableAsync();
+        }
+
         public async Task<User> LoginUser(string email, string password)
         {
-            var users = await GetUsers(email, password);
+            var users = await Login(email, password);
             Debug.WriteLine("LoginUser:"+ email+" - " + password+ " - " + users.ToList().Count.ToString());
             User user = null;
             if (users != null&&users.Any()){
@@ -90,6 +113,7 @@ namespace MyDigitalShelf.Model.Service
         public async Task CleanData()
         {
             await Table.PurgeAsync("GetAllUsers", Table.CreateQuery(), new System.Threading.CancellationToken());
+            await Table.PurgeAsync("GetAllMyFriends", Table.CreateQuery(), new System.Threading.CancellationToken());
         }
 
         public async void saveUser(User User)

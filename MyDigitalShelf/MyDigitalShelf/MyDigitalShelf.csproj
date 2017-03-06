@@ -54,6 +54,7 @@
     <Compile Include="Storage\Interface\ISQLite.cs" />
     <Compile Include="ViewModel\CategoryDetailDirectoryVM.cs" />
     <Compile Include="ViewModel\ItemDirectoryVM.cs" />
+    <Compile Include="ViewModel\MyFriendVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NotesDirectoryVM.cs" />
     <Compile Include="View\CategoryInfoPage.xaml.cs">
@@ -78,6 +79,12 @@
     </Compile>
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyFriendItems.xaml.cs">
+      <DependentUpon>MyFriendItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyFriendsPage.xaml.cs">
+      <DependentUpon>MyFriendsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\NotesDetailPage.xaml.cs">
       <DependentUpon>NotesDetailPage.xaml</DependentUpon>
@@ -214,6 +221,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\Home.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\MyFriendsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\MyFriendItems.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

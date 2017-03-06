@@ -28,7 +28,7 @@ namespace MyDigitalShelf.View
             User user = await loginVM.LoginDirectory();
             if (user != null)
             {
-                Home home = new View.Home(user.Id);
+                Home home = new View.Home(user);
                 await Navigation.PushAsync(home);
                 Navigation.RemovePage(this);
             }

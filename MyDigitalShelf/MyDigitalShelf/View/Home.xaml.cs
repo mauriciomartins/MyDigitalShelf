@@ -15,16 +15,22 @@ namespace MyDigitalShelf.View
     {
         private Page itemPage;
         private SearchItemPage searchItemPage;
+        private MyFriendsPage MyFriendsPage;
         private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
-        public Home(string UserId)
+        public Home(User User)
         {
             InitializeComponent();
-            this.ItemDirectoryVM.UserId = UserId;
+            this.ItemDirectoryVM.UserId = User.Id;
+            this.ItemDirectoryVM.IsMine = true;
             this.BindingContext = ItemDirectoryVM;
-            this.itemPage = new MainPage(ItemDirectoryVM);
-            this.searchItemPage = new SearchItemPage(UserId, ItemDirectoryVM.ItemList);
+            this.itemPage       = new MainPage(ItemDirectoryVM);
+            this.MyFriendsPage  = new MyFriendsPage(User);
+            this.searchItemPage = new SearchItemPage(User.Id, ItemDirectoryVM.ItemList);
             this.Children.Add(
                 itemPage
+            );
+            this.Children.Add(
+                MyFriendsPage
             );
             this.Children.Add(
                 searchItemPage

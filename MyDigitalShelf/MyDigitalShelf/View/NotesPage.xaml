@@ -13,8 +13,6 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh" Command="{Binding LoadContentDirectoryCommand}"/>
-        <ToolbarItem Text="Edit" x:Name  ="UpdateNote"/>
-        <ToolbarItem Text="Add" x:Name   ="AddNote"/>
     </ContentPage.ToolbarItems>
         <ContentPage.Content>
         <StackLayout >

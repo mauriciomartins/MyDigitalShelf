@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MyDigitalShelf"
-             x:Class="MyDigitalShelf.MainPage"
-              xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-             Title="My Shelf"
+             x:Class="MyDigitalShelf.View.MyFriendItems"
+             Title="{Binding User.Name}"
              >
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Logout" x:Name="LogoutButton" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Padding="10" Orientation="Horizontal"  HorizontalOptions="Fill"  >
@@ -37,9 +32,9 @@
                 Padding="10" 
                 IsVisible="{Binding IsEmpty}" 
                 VerticalOptions="FillAndExpand">
-                    <Image   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
-                    <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large" />
-                </StackLayout>
+                <Image   VerticalOptions="Start"  HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
+                <Label  TextColor="Gray" Text="Nenhuma nota foi adicionada!"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large" />
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+      </ContentPage.Content>
+    </ContentPage>

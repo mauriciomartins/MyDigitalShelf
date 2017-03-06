@@ -5,7 +5,6 @@
              Title="{Binding Item.Name}"
              >
     <ContentPage.ToolbarItems >
-        <ToolbarItem Text="Edit"   x:Name="UpdateItem"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView  >

@@ -21,7 +21,9 @@ namespace MyDigitalShelf.View
             InitializeComponent();
             this.ItemDirectoryVM.UserId   = userId;
             this.ItemDirectoryVM.ItemList = ItemList;
-            this.BindingContext  = ItemDirectoryVM;
+            this.ItemDirectoryVM.IsMine   = true;
+            this.BindingContext           = ItemDirectoryVM;
+            this.LogoutButton.Clicked += LogoutButton_Clicked;
         }
 
         private async  void SelectItemButton_Clicked(object sender, EventArgs e)
@@ -61,6 +63,11 @@ namespace MyDigitalShelf.View
             this.ItemList.SelectedItem = null;
         }
 
+        private void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            GoBack();
+        }
+
         internal void RemoveItem(Item item)
         {
             this.ItemDirectoryVM.Remove(item);
@@ -69,6 +76,24 @@ namespace MyDigitalShelf.View
         internal void AppedItem(Item item)
         {
             this.ItemDirectoryVM.Add(item);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            this.GoBack();
+
+            return true;
+        }
+
+        private async void GoBack()
+        {
+            var answer = await DisplayAlert("Logout", "Would you like to logout?", "Yes", "Cancel");
+            if (answer)
+            {
+                await Navigation.PopToRootAsync();
+                await Navigation.PushAsync(new LoginPage());
+                Navigation.RemovePage((Home)this.Parent);
+            }
         }
     }
 }

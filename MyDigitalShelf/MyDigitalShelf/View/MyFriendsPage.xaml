@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyDigitalShelf.View.SearchItemPage"
-             Title="Search List">
+             x:Class="MyDigitalShelf.View.MyFriendsPage"
+              Title="My Friends">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout" x:Name="LogoutButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout >
             <StackLayout Padding="10" Orientation="Horizontal"  HorizontalOptions="Fill"  >
-                <Entry Placeholder="Ex. Digital Fortress"   Text="{Binding SearchName}" HorizontalOptions="FillAndExpand"/>
-                <Button Text="GO" x:Name="SearchButton" Command="{Binding SearchItemCommand}" HorizontalOptions="End"/>
+                <Entry Placeholder="Ex. Name"   Text="{Binding SearchName}" HorizontalOptions="FillAndExpand"/>
+                <Button Text="GO" x:Name="SearchButton" Command="{Binding SearchFriendsCommand}" HorizontalOptions="End"/>
             </StackLayout>
             <ListView 
                 Margin="10,10,10,10" 
-                x:Name="ItemList" 
-                ItemsSource="{Binding SearchingItemsList}"
+                x:Name="ItemList"
+                ItemsSource="{Binding MyFriendList}"
                 AbsoluteLayout.LayoutFlags="All" 
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding SearchItemCommand}"
+                RefreshCommand="{Binding SearchFriendsCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
@@ -27,7 +27,7 @@
                 >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell  ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Writer}" />
+                        <ImageCell  ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Email}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -18,16 +18,23 @@ namespace MyDigitalShelf.model
         private string searchName="";
         private Item   item;
         private string userId;
+        private User   user;
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
         public ObservableCollection<Item> SearchingItemsList { get; set; }
-        private bool isBusy = false;
+        private bool isBusy  = false;
         private bool isEmpty = false;
-
+        private bool isMine  = true;
         public string SearchName
         {
             get { return this.searchName; }
             set { this.searchName = value; OnPropertyChanged(); }
+        }
+
+        public User User
+        {
+            get { return this.user; }
+            set { this.user = value; OnPropertyChanged(); }
         }
 
         public string UserId
@@ -62,7 +69,11 @@ namespace MyDigitalShelf.model
             get { return this.isEmpty; }
             set { this.isEmpty = value; OnPropertyChanged(); }
         }
-
+        public bool IsMine
+        {
+            get { return this.isMine; }
+            set { this.isMine = value; OnPropertyChanged(); }
+        }
         public bool ShowItemsSelectedMenu()
         {
             return item.Id != null && item.Id.Length>0;
@@ -191,7 +202,7 @@ namespace MyDigitalShelf.model
                     if (items.Any()) { 
                         foreach (var Item in items)
                         {
-                            Item.IsMine   = true;
+                            Item.IsMine   = IsMine;
                             Item.IsStored = true;
                             this.ItemList.Add(Item);
                         }
@@ -252,7 +263,7 @@ namespace MyDigitalShelf.model
                                 
                                     item.Link = book.VolumeInfo.Link;
                                     item.Source   = "Livro";
-                                    item.IsMine   = false;
+                                    item.IsMine   = IsMine;
                                     item.IsStored = false;
                                     this.SearchingItemsList.Add(item);
                                 }
