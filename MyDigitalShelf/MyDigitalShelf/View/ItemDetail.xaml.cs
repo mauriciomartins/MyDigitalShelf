@@ -24,7 +24,6 @@ namespace MyDigitalShelf.View
             this.isNew = (item.Id == null || item.Id.Length == 0);
             this.BindingContext = itemDirectoryVM;
             this.SaveButton.Clicked         += SaveButton_Clicked;
-            this.SearchItemButton.Clicked   += SearchItemButton_Clicked;
             this.DeleteButton.Clicked       += DeleteButton_Clicked;
         }
 
@@ -39,13 +38,8 @@ namespace MyDigitalShelf.View
                 itemDirectoryVM.DeleteData();
                 await Navigation.PopToRootAsync();
                 NavigationPage navPage = (NavigationPage)App.Current.MainPage;
-                ((MainPage)navPage.CurrentPage).RemoveItem(this.itemDirectoryVM.Item);
+                ((Home)navPage.CurrentPage).RemoveItem(this.itemDirectoryVM.Item);
             }
-        }
-
-        private void SearchItemButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new SearchItemPage(itemDirectoryVM.Item));
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -61,11 +55,12 @@ namespace MyDigitalShelf.View
             else
             {
                 itemDirectoryVM.SaveData();
-                Page page = await Navigation.PopAsync();
+                await Navigation.PopToRootAsync();
                 if (this.isNew)
                 {
                     NavigationPage navPage = (NavigationPage)App.Current.MainPage;
-                    ((MainPage)navPage.CurrentPage).AppedItem(this.itemDirectoryVM.Item);
+                    Debug.WriteLine("Item Detail Page:"+ App.Current);
+                    ((Home)navPage.CurrentPage).AppedItem(this.itemDirectoryVM.Item);
                 }
             }
         }

@@ -59,9 +59,13 @@
     <Compile Include="View\CategoryInfoPage.xaml.cs">
       <DependentUpon>CategoryInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ItemDetail.xaml.cs">
       <DependentUpon>ItemDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ItemList.cs" />
     <Compile Include="View\ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
@@ -204,6 +208,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\ItemViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\Home.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

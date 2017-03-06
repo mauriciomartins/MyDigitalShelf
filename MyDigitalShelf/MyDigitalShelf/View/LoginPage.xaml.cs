@@ -14,7 +14,8 @@ namespace MyDigitalShelf.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
-    {   private LoginVM loginVM = new LoginVM();
+    {
+        private LoginVM loginVM = new LoginVM();
         public LoginPage()
         {
             InitializeComponent();
@@ -27,8 +28,8 @@ namespace MyDigitalShelf.View
             User user = await loginVM.LoginDirectory();
             if (user != null)
             {
-                
-                await Navigation.PushAsync(new MainPage(user.Id));
+                Home home = new View.Home(user.Id);
+                await Navigation.PushAsync(home);
                 Navigation.RemovePage(this);
             }
         }

@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDigitalShelf.View.SearchItemPage"
              Title="Search List">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Select" x:Name="SelectItemButton" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout >
             <StackLayout Padding="10" Orientation="Horizontal"  HorizontalOptions="Fill"  >
@@ -15,7 +12,7 @@
             <ListView 
                 Margin="10,10,10,10" 
                 x:Name="ItemList" 
-                ItemsSource="{Binding ItemList}"
+                ItemsSource="{Binding SearchingItemsList}"
                 AbsoluteLayout.LayoutFlags="All" 
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"

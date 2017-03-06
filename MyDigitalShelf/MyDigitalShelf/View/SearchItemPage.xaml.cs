@@ -1,6 +1,7 @@
 ﻿using MyDigitalShelf.model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,12 @@ namespace MyDigitalShelf.View
     public partial class SearchItemPage : ContentPage
     {
         ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
-        public SearchItemPage(Item item)
+        public SearchItemPage(string userId, ObservableCollection<Item> ItemList)
         {
             InitializeComponent();
+            this.ItemDirectoryVM.UserId   = userId;
+            this.ItemDirectoryVM.ItemList = ItemList;
             this.BindingContext  = ItemDirectoryVM;
-            this.SelectItemButton.Clicked += SelectItemButton_Clicked;
-            this.ItemDirectoryVM.Item = item;
         }
 
         private async  void SelectItemButton_Clicked(object sender, EventArgs e)
@@ -53,8 +54,21 @@ namespace MyDigitalShelf.View
             {
                 return;
             }
-            Navigation.PushModalAsync(new View.ItemViewPage(this.ItemDirectoryVM.UserId, selectedItem), true);
-            
+            selectedItem.UserId   = this.ItemDirectoryVM.UserId;
+            selectedItem.Position = this.ItemDirectoryVM.LastPosition();
+            selectedItem.Date     = DateTime.Today.Year.ToString();
+            Navigation.PushAsync(new View.ItemViewPage(this.ItemDirectoryVM.UserId, selectedItem), true);
+            this.ItemList.SelectedItem = null;
+        }
+
+        internal void RemoveItem(Item item)
+        {
+            this.ItemDirectoryVM.Remove(item);
+        }
+
+        internal void AppedItem(Item item)
+        {
+            this.ItemDirectoryVM.Add(item);
         }
     }
 }

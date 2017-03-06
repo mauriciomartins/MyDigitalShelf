@@ -4,11 +4,11 @@
              xmlns:local="clr-namespace:MyDigitalShelf"
              x:Class="MyDigitalShelf.MainPage"
               xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-             Title="My Shelf">
+             Title="My Shelf"
+            
+            >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Item" x:Name   ="AddItem" Order="Secondary"/>
-        <ToolbarItem Text="Add Category" x:Name="AddCategoryButton" Order="Secondary"/>
-        <ToolbarItem Text="Logout" x:Name="LogoutButton" Order="Secondary"/>
+        <ToolbarItem Text="Logout" x:Name="LogoutButton" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

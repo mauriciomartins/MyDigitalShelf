@@ -12,17 +12,16 @@ using Xamarin.Forms;
 namespace MyDigitalShelf
 {
     public partial class MainPage : ContentPage
-    {   private ItemDirectoryVM ItemDirectoryVM = new ItemDirectoryVM();
-        private string id;
-
-        public MainPage(string UserId)
+    {
+        private ItemDirectoryVM ItemDirectoryVM;
+        public MainPage(ItemDirectoryVM ItemDirectoryVM)
         {
             InitializeComponent();
-            this.ItemDirectoryVM.UserId = UserId;
-            this.BindingContext = ItemDirectoryVM;
-            this.AddItem.Clicked += AddItem_Clicked;
+            this.ItemDirectoryVM = ItemDirectoryVM;
+            this.BindingContext  = this.ItemDirectoryVM;
             this.LogoutButton.Clicked += LogoutButton_Clicked;
             this.Refresh();
+            
         }
 
         private  void LogoutButton_Clicked(object sender, EventArgs e)
@@ -33,15 +32,6 @@ namespace MyDigitalShelf
         public  void Refresh()
         {
               ItemDirectoryVM.LoadDirectory();
-        }
-
-        private void AddItem_Clicked(object sender, EventArgs e)//
-        {
-            Item newItem     = new Item();
-            newItem.Position = this.ItemDirectoryVM.LastPosition();
-            newItem.Date     = DateTime.Today.Year.ToString();
-            Navigation.PushAsync(new View.ItemDetail(this.ItemDirectoryVM.UserId, newItem), true);
-           
         }
 
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

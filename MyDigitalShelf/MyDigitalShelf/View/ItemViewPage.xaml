@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDigitalShelf.View.ItemViewPage"
-             Title="{Binding Item.Name}">
+             Title="{Binding Item.Name}"
+             >
     <ContentPage.ToolbarItems >
         <ToolbarItem Text="Edit"   x:Name="UpdateItem"/>
     </ContentPage.ToolbarItems>

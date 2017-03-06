@@ -13,13 +13,14 @@ using Xamarin.Forms;
 
 namespace MyDigitalShelf.model
 {
-    class ItemDirectoryVM : ObservableBaseObject
+    public class ItemDirectoryVM : ObservableBaseObject
     {
         private string searchName="";
         private Item   item;
         private string userId;
         private ItemDirectoryService ItemDirectoryService;
         public ObservableCollection<Item> ItemList  { get; set; }
+        public ObservableCollection<Item> SearchingItemsList { get; set; }
         private bool isBusy = false;
         private bool isEmpty = false;
 
@@ -89,9 +90,10 @@ namespace MyDigitalShelf.model
         }
         public ItemDirectoryVM()
         {
-            this.ItemDirectoryService = new ItemDirectoryService();
-            this.ItemList = new ObservableCollection<Item>();
-            this.IsBusy = false;
+            this.ItemDirectoryService     = new ItemDirectoryService();
+            this.ItemList                 = new ObservableCollection<Item>();
+            this.SearchingItemsList       = new ObservableCollection<Item>();
+            this.IsBusy                   = false;
             this.LoadItemDirectoryCommand = new Command(()=> LoadDirectory(),()=>!this.IsBusy);
             this.CleanDataCommand         = new Command(() => CleanData(), () => !this.IsBusy);
             this.SaveCommand              = new Command(() => SaveData(), () => !this.IsBusy);
@@ -105,8 +107,15 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    this.item.UserId = this.UserId;
+                    this.item.UserId   = this.UserId;
+                    this.item.IsMine   = true;
+                    this.item.IsStored = true;
                     this.ItemDirectoryService.saveItem(this.item);
+
+                    if (this.SearchingItemsList != null && this.SearchingItemsList.Any() && this.SearchingItemsList.Count > 0)
+                    {
+                        this.SearchingItemsList.Remove(this.item);
+                    }
                     IsBusy = false;
                     await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Aviso!", "Operação Realizada com sucesso!", "OK");
                 }
@@ -208,9 +217,9 @@ namespace MyDigitalShelf.model
                 try
                 {
                     IsBusy = true;
-                    if (this.ItemList != null && this.ItemList.Any() && this.ItemList.Count > 0)
+                    if (this.SearchingItemsList != null && this.SearchingItemsList.Any() && this.SearchingItemsList.Count > 0)
                     {
-                        this.RemoveAll(this.ItemList);
+                        this.RemoveAll(this.SearchingItemsList);
                     }
 
                     if (this.SearchName==null||this.SearchName.Length == 0)
@@ -221,7 +230,7 @@ namespace MyDigitalShelf.model
                         var items = await this.ItemDirectoryService.GetBooks(SearchName.Replace(" ","+"));
                         if (items!=null)
                         {
-                            Debug.WriteLine("SearchItem:" + items.Books.Length);
+                            //Debug.WriteLine("SearchItem:" + items.Books.Length);
                             foreach (var book in items.Books)
                             {
                                 if (book.VolumeInfo != null)
@@ -245,7 +254,7 @@ namespace MyDigitalShelf.model
                                     item.Source   = "Livro";
                                     item.IsMine   = false;
                                     item.IsStored = false;
-                                    this.ItemList.Add(item);
+                                    this.SearchingItemsList.Add(item);
                                 }
                             
                             }
