@@ -27,7 +27,7 @@
                 >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell  ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding Email}" />
+                        <ImageCell  ImageSource="{Binding Image}"   Text="{Binding Name}" Detail="{Binding Email}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

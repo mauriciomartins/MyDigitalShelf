@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using MyDigitalShelf.Droid;
 using MyDigitalShelf.Android;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace MyDigitalShelf.Droid
 {
@@ -22,6 +23,7 @@ namespace MyDigitalShelf.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            ImageCircleRenderer.Init();
             LoadApplication(new App());
         }
 

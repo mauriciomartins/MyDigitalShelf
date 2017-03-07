@@ -26,6 +26,7 @@ namespace MyDigitalShelf
 
         private  void LogoutButton_Clicked(object sender, EventArgs e)
         {
+            ItemDirectoryVM.CleanData();
             GoBack();
         }
 

@@ -127,7 +127,16 @@ namespace MyDigitalShelf.Model.Service
 
         public async Task AddUser(User User)
         {
-            await Table.InsertAsync(User);
+            
+            if (User.Id == null || User.Id == "")
+            {
+                await Table.InsertAsync(User);
+            }
+            else
+            {
+                await Table.UpdateAsync(User);
+            }
+
 
             await SyncAsync();
         }

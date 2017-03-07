@@ -163,7 +163,7 @@ namespace MyDigitalShelf.model
             }
         }
 
-        private async void CleanData()
+        public async void CleanData()
         {
             if (!IsBusy)
             {

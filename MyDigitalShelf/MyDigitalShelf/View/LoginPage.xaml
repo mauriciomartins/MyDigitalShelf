@@ -11,8 +11,8 @@
             <Entry Text="{Binding Email}" />
             <Label Text="Password:"/>
             <Entry Text="{Binding Password}" IsPassword="true"/>
-            <Button Text="GO" x:Name="GoButton"/>
+            <Button Text="Log In" x:Name="GoButton"/>
+            <Button Text="Sign Up" x:Name="SignUpButton"/>
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

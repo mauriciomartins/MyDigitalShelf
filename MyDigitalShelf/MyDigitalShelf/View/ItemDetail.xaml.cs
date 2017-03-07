@@ -23,8 +23,8 @@ namespace MyDigitalShelf.View
             this.itemDirectoryVM.Item   = item;
             this.isNew = (item.Id == null || item.Id.Length == 0);
             this.BindingContext = itemDirectoryVM;
-            this.SaveButton.Clicked         += SaveButton_Clicked;
-            this.DeleteButton.Clicked       += DeleteButton_Clicked;
+            this.SaveButton.Clicked    += SaveButton_Clicked;
+            this.DeleteButton.Clicked  += DeleteButton_Clicked;
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)

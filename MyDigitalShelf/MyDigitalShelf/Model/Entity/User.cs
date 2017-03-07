@@ -18,7 +18,8 @@ namespace MyDigitalShelf.model
         private string password;
         private string birthDate;
         private string image;
-
+        private bool isMine;
+        private bool isStored;
         [JsonProperty("id")]
         public string Id
         {
@@ -51,7 +52,17 @@ namespace MyDigitalShelf.model
             get { return this.birthDate; }
             set { this.birthDate = value; OnPropertyChanged(); }
         }
+        public bool IsMine
+        {
+            get { return this.isMine; }
+            set { this.isMine = value; OnPropertyChanged(); }
+        }
 
+        public bool IsStored
+        {
+            get { return this.isStored; }
+            set { this.isStored = value; OnPropertyChanged(); }
+        }
         [JsonProperty("image")]
         public string Image
         {

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDigitalShelf.View.SignUpPage"
+             Title="Profil">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"   x:Name="SaveButton" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="10" >
+            <ActivityIndicator IsRunning="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutBounds=".5, .5,60,60" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Label  TextColor="Gray" Text="Name"         LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+            <Entry  Text="{Binding User.Name}"       x:Name="Name"   />
+            <Label  TextColor="Gray" Text="Email"         LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+            <Entry  Text="{Binding User.Email}"  x:Name="Email"   />
+            <StackLayout IsVisible="{Binding !User.IsStored}">
+                <Label  TextColor="Gray" Text="Password"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+                <Entry  Text="{Binding User.Password}"    x:Name="Password"   />
+                <Label  TextColor="Gray" Text="Confirm Password"  LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+                <Entry  Text=""    x:Name="ConfirmPassword"   />
+            </StackLayout>
+            <Label  TextColor="Gray" Text="Birth Date"         LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+            <Entry  Text="{Binding User.BirthDate}"  x:Name="BirtDate"   />
+            <Label  TextColor="Gray" Text="Photo"         LineBreakMode="WordWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize="Large"/>
+            <Entry  Text="{Binding User.Image}"      x:Name="Image"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

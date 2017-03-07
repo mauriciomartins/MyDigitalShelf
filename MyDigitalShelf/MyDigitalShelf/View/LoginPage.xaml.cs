@@ -19,8 +19,16 @@ namespace MyDigitalShelf.View
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = loginVM;
-            this.GoButton.Clicked += GoButton_clicked;
+            this.BindingContext        = loginVM;
+            this.GoButton.Clicked     += GoButton_clicked;
+            this.SignUpButton.Clicked += SignUpButton_clicked;
+        }
+
+        private async void SignUpButton_clicked(object sender, EventArgs e)
+        {
+            bool isNew = true;
+            User User  = new User();
+            await Navigation.PushAsync(new SignUpPage(isNew, User));
         }
 
         private async void GoButton_clicked(object sender, EventArgs e)
